@@ -1,3 +1,6 @@
+body{
+    margin: 0;
+}
 :root{
     --hidVerde: #008000;   
 }
@@ -43,20 +46,17 @@ header img{
 
 
 /* abaixo do header */
-.main{
-    margin-top: 2%;    
+.main{ 
     display: flex;
     flex-direction: column;
-    margin-bottom: 2%;
     border-bottom: 10px solid var(--hidVerde);
 }
 .content-main{
     display: flex;
     flex-direction: row;
     width: 100%;
-    gap: 40px;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: space-around;
 }
 .titulo{
     color: black;
@@ -66,7 +66,6 @@ header img{
     margin-bottom: 20px;
 }
 .main .text-main{
-    margin-left: 5%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -78,14 +77,14 @@ header img{
     font-weight: bold;
     max-width: 800px;
 }
+.img-main img{
+    width: 300px;
+    height: auto;
+}
 .main button{
     width: 10%;
     height: 30px;
     border-radius: 20px;
     align-self: center;
-}
-.img-main img{
-    margin-left: 100%;
-    width: 300px;
-    height: auto;
+    margin-bottom: 20px;
 }
