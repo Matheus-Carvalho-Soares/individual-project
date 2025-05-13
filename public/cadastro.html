@@ -6,19 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
-        <ul class="navbar">
-            <img src="/public/assets/imgs/h2_header.png" alt="">
+        <ul class="navbar" style="margin-left: 145.5px; margin-right: 145.5px;">
+            <a href="./index.html">
+                <img src="./assets/imgs/h2_header.png" alt="">
+            </a>
             <li>
-                <a href="/public/index.html">
+                <a href="./index.html">
                     <button>HOME</button>
                 </a>
             </li>
             <li>
-                <a href="/public/cadastro.html">
+                <a href="./cadastro.html">
                     <button>SIGN-UP</button>
                 </a>
             </li>
@@ -28,34 +33,34 @@
                         GAME
                     </button></a>
             </li>
-            <a href="/public/saibamais.html" class="a-content">
+            <a href="./saibamais.html" class="a-content">
                 <button>Saiba mais!</button>
             </a>
         </ul>
     </header>
     <div class="content">
         <div class="background">
-            <img src="/public/assets/imgs/hid-bg.png" alt="">
+            <img src="./assets/imgs/hid-bg.png" alt="">
             <div class="text-content">
                 <div class="card">
-                    <h1>SIGN-UP</h1>
+                    <h1>SIGN-UP </h1>
                     <p>Insira seu email.</p>
-                    <input id="email"type="text" placeholder="matheushidrogenio@gmail.com">
+                    <input id="email" type="text" placeholder="matheushidrogenio@gmail.com">
                     <p>Insira sua senha.</p>
-                    <input id="senha"type="text" placeholder="Teste123@">
+                    <input id="senha" type="password" placeholder="Teste123@">
                     <span>Conhecia o tema anteriormente?</span>
                     <div class="text-radio">
                         <label>
-                            <input type="radio" name="opcao" value="sim"> <span>Sim</span>
+                            <input type="radio" name="opcao" value="1"> <span>Sim</span>
                         </label>
                         <label>
-                            <input type="radio" name="opcao" value="nao"> <span>Não</span>
+                            <input type="radio" name="opcao" value="0"> <span>Não</span>
                         </label>
                     </div>
-                    
+
                     <button onClick="cadastro()">Enviar!</button>
 
-                    <a href="/public/login.html">Já é cadastrado? Clique aqui!</a>
+                    <a href="./login.html" class="sign">Já é cadastrado? Clique aqui!</a>
                 </div>
             </div>
         </div>
@@ -63,3 +68,45 @@
 </body>
 
 </html>
+
+<script>
+    function cadastro() {
+        var emailVar = email.value;
+        var senhaVar = senha.value;
+        var radioVar = Number(document.querySelector('input[name="opcao"]:checked').value);
+
+        if (emailVar == "" || senhaVar == "") {
+            alert("Email e/ou senha vazios.")
+            return false;
+        }
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar,
+                radioServer: radioVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        return false;
+    }
+</script>
