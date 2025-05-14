@@ -34,7 +34,7 @@
                     </button></a>
             </li>
             <a href="./saibamais.html" class="a-content">
-                <button>Saiba mais!</button>
+                <button>Sobre mim!</button>
             </a>
         </ul>
     </header>
@@ -48,10 +48,13 @@
                     <input id="email" type="text" placeholder="matheushidrogenio@gmail.com">
                     <p>Insira sua senha.</p>
                     <input id="senha" type="password" placeholder="Teste123@">
+                    <div class="teste">
+                        <span class="preto" id="numero">A senha precisa contér 8 números.</span>
+                    </div>
                     <span>Conhecia o tema anteriormente?</span>
                     <div class="text-radio">
                         <label>
-                            <input type="radio" name="opcao" value="1"> <span>Sim</span>
+                            <input type="radio" name="opcao" value="1" checked> <span>Sim</span>
                         </label>
                         <label>
                             <input type="radio" name="opcao" value="0"> <span>Não</span>
@@ -70,43 +73,91 @@
 </html>
 
 <script>
-    function cadastro() {
+    function verify() {
+        var caracterEspecial = "!@#$%&*()."
+        var numeros = "1234567890"
         var emailVar = email.value;
         var senhaVar = senha.value;
         var radioVar = Number(document.querySelector('input[name="opcao"]:checked').value);
+        var verifyEmail = false;
+        var verifySenhaLength = false;
+        var verifyCaracterEspecial = false;
+        var verifyNumero = false;
+
 
         if (emailVar == "" || senhaVar == "") {
             alert("Email e/ou senha vazios.")
             return false;
         }
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar,
-                radioServer: radioVar,
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
 
-                if (resposta.ok) {
+        if (emailVar.includes("@") && emailVar.includes(".")) {
+            verifyEmail = true;
+        } else {
+            console.log("Email não contém @ e .")
+        }
+        if (senhaVar >= 8) {
+            verifySenhaLength = true;
+        } else {
+            console.log("Senha não contém 8 caractéres.")
+        }
+        for (var i = 0; i < senhaVar.length; i++) {
+            if (caracterEspecial.includes(senhaVar[i])) {
+                verifyCaracterEspecial = true;
+            }
+            if (numeros.includes(senhaVar[i])) {
+                verifyNumero = true;
+            }
+            if (verifyNumero && verifyCaracterEspecial) {
+                break;
+            }
+        }
+        if (!verifyCaracterEspecial) {
+            console.log("Senha não contém caractér especial.")
+        }
+        if (!verifyNumero) {
+            console.log("Senha não contém números.")
+        }
+        if(verifyCaracterEspecial && verifyEmail && verifyNumero && verifySenhaLength){
+            return true;
+        } else{
+            return false;
+        }
+    }
+    function cadastro() {
+        var emailVar = email.value;
+        var senhaVar = senha.value;
+        var radioVar = Number(document.querySelector('input[name="opcao"]:checked').value);
+        if (verify()) {
 
-                    alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000");
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar,
+                    radioServer: radioVar,
+                }),
             })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-            });
-        return false;
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {
+
+                        alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+                        setTimeout(() => {
+                            window.location = "login.html";
+                        }, "2000");
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+            return false;
+        }
     }
 </script>
