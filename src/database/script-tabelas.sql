@@ -23,3 +23,20 @@ CONSTRAINT fkDep PRIMARY KEY (idPontuacao, fkUsuario),
 CONSTRAINT fk_Usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 pontos INT,
 dtPontuacao DATETIME DEFAULT CURRENT_TIMESTAMP);
+
+CREATE TABLE dadosHidrogenio(
+idDados INT PRIMARY KEY AUTO_INCREMENT,
+preco INT,
+autonomia INT,
+dtDados DATETIME DEFAULT CURRENT_TIMESTAMP);
+
+INSERT INTO usuario VALUES
+(1, 1, 'usuario123@usuario.com', 'usuario123', DEFAULT);
+
+INSERT INTO pontuacao VALUES
+(1, 1, 50, DEFAULT);
+
+INSERT INTO dadosHidrogenio VALUES
+(1, 6.20, 1200, DEFAULT);
+
+SELECT * from dadosHidrogenio;
