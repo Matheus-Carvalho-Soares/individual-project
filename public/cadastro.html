@@ -5,159 +5,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/cadastro.css">
 </head>
 
 <body>
-    <header>
-        <ul class="navbar" style="margin-left: 145.5px; margin-right: 145.5px;">
-            <a href="./index.html">
-                <img src="./assets/imgs/h2_header.png" alt="">
-            </a>
-            <li>
-                <a href="./index.html">
-                    <button>HOME</button>
-                </a>
-            </li>
-            <li>
-                <a href="./cadastro.html">
-                    <button>SIGN-UP</button>
-                </a>
-            </li>
-            <li>
-                <a>
-                    <button>
-                        GAME
-                    </button></a>
-            </li>
-            <a href="./saibamais.html" class="a-content">
-                <button>Sobre mim!</button>
-            </a>
-        </ul>
-    </header>
-    <div class="content">
-        <div class="background">
-            <img src="./assets/imgs/hid-bg.png" alt="">
-            <div class="text-content">
-                <div class="card">
-                    <h1>SIGN-UP </h1>
-                    <p>Insira seu email.</p>
-                    <input id="email" type="text" placeholder="matheushidrogenio@gmail.com">
-                    <p>Insira sua senha.</p>
-                    <input id="senha" type="password" placeholder="Teste123@">
-                    <div class="teste">
-                        <span class="preto" id="numero">A senha precisa contér 8 números.</span>
-                    </div>
-                    <span>Conhecia o tema anteriormente?</span>
-                    <div class="text-radio">
-                        <label>
-                            <input type="radio" name="opcao" value="1" checked> <span>Sim</span>
-                        </label>
-                        <label>
-                            <input type="radio" name="opcao" value="0"> <span>Não</span>
-                        </label>
-                    </div>
-
-                    <button onClick="cadastro()">Enviar!</button>
-
-                    <a href="./login.html" class="sign">Já é cadastrado? Clique aqui!</a>
+    <section class="main">
+        <video autoplay muted loop class="video">
+            <source src="./assets/videos/videoplayback.mp4" type="">
+        </video>
+        <div class="logo">
+            asdfasdf
+        </div>
+        <div class="cadastro">
+            <div id="imagens">
+                <img id="imagemMasc" class="personagemM">
+                <img id="imagemFem" class="personagemF">
+            </div>
+            <div class="card">
+                <div class="inputCard">
+                    <h1>Insira o nome do seu personagem.</h1>
+                    <input class="cardInput" type="text" placeholder="MatheusMago">
+                </div>
+                <div class="inputGenero">
+                    <input onClick="gen()" type="radio" name="genero" id="generoMasc" value="m" hidden checked>
+                    <label for="generoMasc" class="radioGenero masc"></label>
+                    <input onClick="gen()" type="radio" name="genero" id="generoFem" value="f" hidden>
+                    <label for="generoFem" class="radioGenero fem"></label>
                 </div>
             </div>
+            <div class="paginas">
+                <button onClick="window.location = 'index.html'">
+                    <div class="cardP">
+                        Voltar
+                    </div>
+                </button>
+                <button>
+                    <div class="cardP">
+                        Avançar
+                    </div>
+                </button>
+            </div>
         </div>
-    </div>
+        <footer>
+            <div class="esquerda">
+                <p>Matheus Soares - 2025; v1.0.0</p>
+                <div class="social">
+                    <a href="">a</a>
+                    <a href="">a</a>
+                </div>
+            </div>
+        </footer>
+    </section>
 </body>
 
 </html>
 
 <script>
-    function verify() {
-        var caracterEspecial = "!@#$%&*()."
-        var numeros = "1234567890"
-        var emailVar = email.value;
-        var senhaVar = senha.value;
-        var radioVar = Number(document.querySelector('input[name="opcao"]:checked').value);
-        var verifyEmail = false;
-        var verifySenhaLength = false;
-        var verifyCaracterEspecial = false;
-        var verifyNumero = false;
+    function gen() {
+        var generoM = document.getElementById('generoMasc')
+        var generoF = document.getElementById('generoFem')
+        var imgMasc = document.getElementById('imagemMasc');
+        var imgFem = document.getElementById('imagemFem');
 
-
-        if (emailVar == "" || senhaVar == "") {
-            alert("Email e/ou senha vazios.")
-            return false;
-        }
-
-        if (emailVar.includes("@") && emailVar.includes(".")) {
-            verifyEmail = true;
+        if (generoF.checked) {
+            imgMasc.style.height = "192px";
+            imgMasc.style.width = "192px";
+            imgFem.style.height = "96px";
+            imgFem.style.width = "96px";
         } else {
-            console.log("Email não contém @ e .")
-        }
-        if (senhaVar >= 8) {
-            verifySenhaLength = true;
-        } else {
-            console.log("Senha não contém 8 caractéres.")
-        }
-        for (var i = 0; i < senhaVar.length; i++) {
-            if (caracterEspecial.includes(senhaVar[i])) {
-                verifyCaracterEspecial = true;
-            }
-            if (numeros.includes(senhaVar[i])) {
-                verifyNumero = true;
-            }
-            if (verifyNumero && verifyCaracterEspecial) {
-                break;
-            }
-        }
-        if (!verifyCaracterEspecial) {
-            console.log("Senha não contém caractér especial.")
-        }
-        if (!verifyNumero) {
-            console.log("Senha não contém números.")
-        }
-        if(verifyCaracterEspecial && verifyEmail && verifyNumero && verifySenhaLength){
-            return true;
-        } else{
-            return false;
-        }
-    }
-    function cadastro() {
-        var emailVar = email.value;
-        var senhaVar = senha.value;
-        var radioVar = Number(document.querySelector('input[name="opcao"]:checked').value);
-        if (verify()) {
-
-            fetch("/usuarios/cadastrar", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    emailServer: emailVar,
-                    senhaServer: senhaVar,
-                    radioServer: radioVar,
-                }),
-            })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-
-                    if (resposta.ok) {
-
-                        alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
-
-                        setTimeout(() => {
-                            window.location = "login.html";
-                        }, "2000");
-                    } else {
-                        throw "Houve um erro ao tentar realizar o cadastro!";
-                    }
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-                });
-            return false;
+            imgFem.style.height = "192px";
+            imgFem.style.width = "192px";
+            imgMasc.style.height = "96px";
+            imgMasc.style.width = "96px";
         }
     }
 </script>
