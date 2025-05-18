@@ -36,26 +36,10 @@ body {
     object-fit: cover;
 }
 
+
 .logo {
     height: 10%;
 }
-
-.personagemM {
-    height: 96px;
-    width: 96px;
-    background-image: url("../assets/imgs/mascPersonagem.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
-.personagemF {
-    height: 96px;
-    width: 96px;
-    background-image: url("../assets/imgs/femPersonagem.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-}
-
 .cadastro {
     height: 75%;
     display: flex;
@@ -64,7 +48,13 @@ body {
     align-items: center;
 }
 
-
+.personagem{
+    height: 96px;
+    width: 96px;
+    background-image: url("../assets/imgs/mascPersonagem.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
 .card {
     padding: 3rem;
     height: 50%;
@@ -196,6 +186,13 @@ footer p {
     font-size: 2rem;
 }
 
-footer a {
-    font-size: 2rem;
+footer a.github {
+    background-image: url("../assets/imgs/github.png");
+    height: 48px;
+    width: 48px;
+}
+footer a.linkedin {
+    background-image: url("../assets/imgs/linkedin.png");
+    height: 48px;
+    width: 48px;
 }

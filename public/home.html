@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="./css/cadastro.css">
+</head>
+
+<body>
+    <section class="main">
+        <video autoplay muted loop class="video">
+            <source src="./assets/videos/videoplayback.mp4" type="">
+        </video>
+        <div class="logo">
+            asdfasdf
+        </div>
+        <div class="cadastro">
+            <div id="imagens">
+                <img id="imagemMasc" class="personagemM">
+                <img id="imagemFem" class="personagemF">
+            </div>
+            <div class="card">
+                <div class="inputCard">
+                    <h1>Insira o nome do seu personagem.</h1>
+                    <input class="cardInput" type="text" placeholder="MatheusMago">
+                </div>
+                <div class="inputGenero">
+                    <input onClick="gen()" type="radio" name="genero" id="generoMasc" value="m" hidden checked>
+                    <label for="generoMasc" class="radioGenero masc"></label>
+                    <input onClick="gen()" type="radio" name="genero" id="generoFem" value="f" hidden>
+                    <label for="generoFem" class="radioGenero fem"></label>
+                </div>
+            </div>
+            <div class="paginas">
+                <button onClick="window.location = 'index.html'">
+                    <div class="cardP">
+                        Voltar
+                    </div>
+                </button>
+                <button>
+                    <div class="cardP">
+                        Avançar
+                    </div>
+                </button>
+            </div>
+        </div>
+        <footer>
+            <div class="esquerda">
+                <p>Matheus Soares - 2025; v1.0.0</p>
+                <div class="social">
+                    <a class="github"href=""></a>
+                    <a class="linkedin"href=""></a>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>
+
+<script>
+    function gen() {
+        var generoM = document.getElementById('generoMasc')
+        var generoF = document.getElementById('generoFem')
+        var imgMasc = document.getElementById('imagemMasc');
+        var imgFem = document.getElementById('imagemFem');
+
+        if (generoF.checked) {
+            imgMasc.style.height = "192px";
+            imgMasc.style.width = "192px";
+            imgFem.style.height = "96px";
+            imgFem.style.width = "96px";
+        } else {
+            imgFem.style.height = "192px";
+            imgFem.style.width = "192px";
+            imgMasc.style.height = "96px";
+            imgMasc.style.width = "96px";
+        }
+    }
+</script>

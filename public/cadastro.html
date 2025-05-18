@@ -16,15 +16,15 @@
         <div class="logo">
             asdfasdf
         </div>
-        <div class="cadastro">
-            <div id="imagens">
-                <img id="imagemMasc" class="personagemM">
-                <img id="imagemFem" class="personagemF">
+        <div id="divCadastro" class="cadastro">
+            <div id="imagens" class="personagem">
+                <!-- <img id="imagemMasc" class="personagemM">
+                <img id="imagemFem" class="personagemF"> -->
             </div>
             <div class="card">
                 <div class="inputCard">
                     <h1>Insira o nome do seu personagem.</h1>
-                    <input class="cardInput" type="text" placeholder="MatheusMago">
+                    <input id="nome" class="cardInput" type="text" placeholder="MatheusMago">
                 </div>
                 <div class="inputGenero">
                     <input onClick="gen()" type="radio" name="genero" id="generoMasc" value="m" hidden checked>
@@ -39,7 +39,7 @@
                         Voltar
                     </div>
                 </button>
-                <button>
+                <button onClick="cadastro()">
                     <div class="cardP">
                         Avançar
                     </div>
@@ -50,8 +50,8 @@
             <div class="esquerda">
                 <p>Matheus Soares - 2025; v1.0.0</p>
                 <div class="social">
-                    <a href="">a</a>
-                    <a href="">a</a>
+                    <a class="github" href=""></a>
+                    <a class="linkedin" href=""></a>
                 </div>
             </div>
         </footer>
@@ -61,22 +61,66 @@
 </html>
 
 <script>
+    var mCheck;
+    var fCheck;
     function gen() {
-        var generoM = document.getElementById('generoMasc')
+        mCheck = true;
+        fCheck = false;
+        var imagem = document.getElementById('imagens');
         var generoF = document.getElementById('generoFem')
-        var imgMasc = document.getElementById('imagemMasc');
-        var imgFem = document.getElementById('imagemFem');
+        var generoM = document.getElementById('generoMasc')
 
         if (generoF.checked) {
-            imgMasc.style.height = "192px";
-            imgMasc.style.width = "192px";
-            imgFem.style.height = "96px";
-            imgFem.style.width = "96px";
+            fCheck = true;
+            mCheck = false;
+            imagem.style.backgroundImage = 'url("./assets/imgs/femPersonagem.png")'
         } else {
-            imgFem.style.height = "192px";
-            imgFem.style.width = "192px";
-            imgMasc.style.height = "96px";
-            imgMasc.style.width = "96px";
+            mCheck = true;
+            fCheck = false;
+            imagem.style.backgroundImage = 'url("./assets/imgs/mascPersonagem.png")';
+        }
+    }
+
+    function cadastro() {
+        var nomePersonagem = nome.value;
+        if (nomePersonagem != "") {
+            divCadastro.innerHTML = `
+            <div class="cadastro" style="width: 100%; height 100%;">
+            <div id="imagens" class="personagem">
+            </div>
+            <div class="card">
+                <div class="inputCard">
+                    <h1>Insira o seu email.</h1>
+                    <input id ="email" class="cardInput" type="text" placeholder="matheusomelhormago@gmail.cmo">
+                </div>
+                <div class="inputCard">
+                    <h1>Insira a sua senha.</h1>
+                    <input id ="senha" class="cardInput" type="text" placeholder="matheusTheMage">
+                </div>
+            </div>
+            <div class="paginas">
+                <button onClick="window.location = 'cadastro.html'">
+                    <div class="cardP">
+                        Voltar
+                    </div>
+                </button>   
+                <button onClick="cadastrar()">
+                    <div class="cardP">
+                        Avançar
+                    </div>
+                </button>
+            </div>`
+            var imagem = document.getElementById('imagens');
+            var tamanhoSenha = document.getElementById('email');
+            var tamanhoEmail = document.getElementById('senha');
+            tamanhoEmail.style.fontSize = "1.5rem";
+            tamanhoSenha.style.fontSize = "1.5rem";
+
+            if (fCheck) {
+                imagem.style.backgroundImage = 'url("./assets/imgs/femPersonagem.png")';
+            } else if (mCheck) {
+                imagem.style.backgroundImage = 'url("./assets/imgs/mascPersonagem.png")';
+            }
         }
     }
 </script>
