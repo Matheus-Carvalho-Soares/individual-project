@@ -18,13 +18,11 @@
         </div>
         <div id="divCadastro" class="cadastro">
             <div id="imagens" class="personagem">
-                <!-- <img id="imagemMasc" class="personagemM">
-                <img id="imagemFem" class="personagemF"> -->
             </div>
             <div class="card">
                 <div class="inputCard">
                     <h1>Insira o nome do seu personagem.</h1>
-                    <input id="nome" class="cardInput" type="text" placeholder="MatheusMago">
+                    <input id="nomeP" class="cardInput" type="text" placeholder="MatheusMago">
                 </div>
                 <div class="inputGenero">
                     <input onClick="gen()" type="radio" name="genero" id="generoMasc" value="m" hidden checked>
@@ -63,7 +61,10 @@
 <script>
     var mCheck;
     var fCheck;
+    var nome;
+    var genero;
     function gen() {
+        nome = nomeP.value;
         mCheck = true;
         fCheck = false;
         var imagem = document.getElementById('imagens');
@@ -71,10 +72,12 @@
         var generoM = document.getElementById('generoMasc')
 
         if (generoF.checked) {
+            genero = "feminino";
             fCheck = true;
             mCheck = false;
             imagem.style.backgroundImage = 'url("./assets/imgs/femPersonagem.png")'
         } else {
+            genero = "masculino";
             mCheck = true;
             fCheck = false;
             imagem.style.backgroundImage = 'url("./assets/imgs/mascPersonagem.png")';
@@ -82,7 +85,7 @@
     }
 
     function cadastro() {
-        var nomePersonagem = nome.value;
+        var nomePersonagem = nome;
         if (nomePersonagem != "") {
             divCadastro.innerHTML = `
             <div class="cadastro" style="width: 100%; height 100%;">
@@ -123,4 +126,83 @@
             }
         }
     }
+
+
+    function verifySenha() {
+        var inputSenha = senha.value;
+        var num = "0123456789";
+        var carEsp = "!@#$%&*().";
+        var verifyEsp = false;
+        var verifyNum = false;
+        var verifyTam = false;
+        var mensagem = "";
+
+        if (inputSenha.length >= 8) {
+            verifyTam = true;
+        }
+        for (var j = 0; j < inputSenha.length; j++) {
+            if (carEsp.includes(inputSenha[j])) {
+                verifyEsp = true;
+                break;
+            }
+        }
+
+        for (var i = 0; i < inputSenha.length; i++) {
+            if (num.includes(inputSenha[i])) {
+                verifyNum = true;
+                break;
+            }
+        }
+        if (verifyTam && verifyEsp && verifyNum) {
+            return true;
+        } else {
+            return false;
+        }
+        cadastrar();
+    }
+
+    function cadastrar() {
+        if (verifySenha()) {
+            var nomeVar = nome;
+            var emailVar = email.value;
+            var senhaVar = senha.value;
+            var generoVar = genero;
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar,
+                    generoServer: generoVar,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+                    if (resposta.ok) {
+
+                        console.log("Cadastro realizado com sucesso! Redirecionando para tela de Login...")
+
+                        setTimeout(() => {
+                            window.location = "index.html";
+                        }, "2000");
+                    } else {
+                        throw "Houve um erro ao tentar realizar o cadastro!";
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+            return false;
+
+        } else {
+            alert("nao vai dar fetch")
+        }
+    }
+
+
 </script>
