@@ -5,53 +5,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HOME</title>
-    <link rel="stylesheet" href="./css/cadastro.css">
+    <link rel="stylesheet" href="./css/home.css">
 </head>
 
 <body>
-    <section class="main">
+    <section class="guia">
         <video autoplay muted loop class="video">
-            <source src="./assets/videos/videoplayback.mp4" type="">
+            <source src="./assets/videos/fundoCeu.mp4" type="">
         </video>
-        <div class="logo">
-            asdfasdf
+        <a href="index.html">Voltar a pagina inicial.
+        </a>
         </div>
-        <div class="cadastro">
-            <div id="imagens">
-                <img id="imagemMasc" class="personagemM">
-                <img id="imagemFem" class="personagemF">
-            </div>
-            <div class="card">
-                <div class="inputCard">
-                    <h1>Insira o nome do seu personagem.</h1>
-                    <input class="cardInput" type="text" placeholder="MatheusMago">
-                </div>
-                <div class="inputGenero">
-                    <input onClick="gen()" type="radio" name="genero" id="generoMasc" value="m" hidden checked>
-                    <label for="generoMasc" class="radioGenero masc"></label>
-                    <input onClick="gen()" type="radio" name="genero" id="generoFem" value="f" hidden>
-                    <label for="generoFem" class="radioGenero fem"></label>
-                </div>
-            </div>
-            <div class="paginas">
-                <button onClick="window.location = 'index.html'">
-                    <div class="cardP">
-                        Voltar
-                    </div>
-                </button>
-                <button>
-                    <div class="cardP">
-                        Avançar
-                    </div>
-                </button>
-            </div>
+        <div id="mensagemC" class="msg">
+        </div>
+        <div class="botao">
+            <button class="botaozinho" onClick="msgGuia()"></button>
+        </div>
+    </section>
+    <section class="mago">
+        <div class="imagem">
+            <div class="img"></div>
+        </div>
+        <div id="mensagemCMago" class="msg">
+        </div>
+        <div class="botao">
+            <button class="botaozinho" onClick="msgMago()"></button>
         </div>
         <footer>
             <div class="esquerda">
                 <p>Matheus Soares - 2025; v1.0.0</p>
                 <div class="social">
-                    <a class="github"href=""></a>
-                    <a class="linkedin"href=""></a>
+                    <a class="github" href=""></a>
+                    <a class="linkedin" href=""></a>
                 </div>
             </div>
         </footer>
@@ -61,22 +46,98 @@
 </html>
 
 <script>
-    function gen() {
-        var generoM = document.getElementById('generoMasc')
-        var generoF = document.getElementById('generoFem')
-        var imgMasc = document.getElementById('imagemMasc');
-        var imgFem = document.getElementById('imagemFem');
+    var contador = -1;
+    var listaMsg = [
+        `Bem-vindo ao mundo de Terraria. Uma terra repleta de mistérios e maravilhas, com grande parte do seu destino deixado ao sabor das imaginações mais selvagens... no entanto, algumas lendas antigas chegaram até os nossos dias. Transmitidas por incontáveis ​​gerações da Ordem do Guia, estas poucas informações servirão para ajudá-lo a navegar em sua jornada e superar as ameaças que espreitam nas sombras. Este conhecimento agora é transmitido a você, o bravo aventureiro, com a esperança de que o ajude em sua jornada para salvar o nosso mundo...`,
+        `No início, os Deuses estabeleceram um equilíbrio para garantir a justiça para todas as criaturas vivas. Esse equilíbrio seria de suma importância, sem nenhum custo muito alto para sua realização. Éons se passaram desde que os Deuses começaram a testar as complexidades da vida em seu experimento de justiça. Nesse processo, incontáveis ​​mundos vivos foram criados e agora existem dentro do universo de Terraria.`,
+        `Cada mundo de Terraria é um ser senciente que sabe tudo o que acontece e pode sentir os pensamentos de todas as criaturas vivas: com seu único propósito sendo garantir que o equilíbrio desejado seja mantido – muitas vezes de forma violenta. Os mundos utilizam muitos mecanismos de defesa para garantir que o equilíbrio seja mantido a todo custo – alguns deles são conhecidos como o Sagrado, a Corrupção e o Carmesim.`,
+        `O Carmesim é um único ser vivo emergente conectado diretamente a cada mundo, compartilhando uma mente coletiva e focado exclusivamente em restaurar o equilíbrio a todo custo. Milhares de mundos antes daquele em que você se encontra agora foram absorvidos por este ser. Muitas pessoas equivocadas cometeram o terrível erro de elevar o Carmesim ao nível de uma divindade – realizando sacrifícios humanos a ele para aplacar a monstruosidade ou buscar seu favor. O Carmesim consome alegremente esses corpos, tornando-se um com eles e produzindo seres aterrorizantes, que perdem a capacidade de sentir e seguem cegamente a mente coletiva.`,
+        `A Corrupção é um câncer causado pelos pecados daqueles que vivem nos mundos de Terraria. As ações e pensamentos vis presentes em todos os seres alimentam o crescimento da Corrupção, que se espalha implacavelmente por cada mundo. A Corrupção não conhece outra coisa senão consumir tudo o que toca, deixando para trás criaturas terríveis e odiosas que existem com o único propósito de causar dor como punição pelo prazer imerecido experimentado pelos seres vivos. Após a Corrupção restaurar o equilíbrio da vida, ela a destrói com o objetivo de transformar o mundo em um abismo desolado e vazio de vida.`,
+        `A Relíquia, por outro lado, é de uma natureza completamente diferente. Dentro de cada mundo há um Guardião que serve como mestre e núcleo do mundo . Uma vez destruída essa criatura, o mundo libertará os Espíritos Antigos da Luz e das Trevas para agilizar o processo de encontrar um novo Guardião. É aqui que a Relíquia é criada e funciona como uma supercompensação da pureza, levada ao extremo. A Relíquia cura ameaças que tentariam violar o equilíbrio crítico da vida, matando qualquer coisa em seu caminho como se estivesse tratando uma infecção – seja amiga, inimiga ou parte neutra. Em última análise, a Relíquia serve para repelir a incessante invasão do controle.`,
+        `É nesse precioso equilíbrio entre vida, desolação e dor que se desenrolam as grandes batalhas lendárias e as aventuras da nossa era. No ponto cego do universo, existe um planeta com um potencial sem precedentes: o seu mundo! Sua história começa com Cthulhu — uma criatura de poder incomensurável e origem desconhecida — que chegou há muito tempo com seu único propósito aparentemente sendo causar destruição e dominar toda a vida senciente que floresce em seu mundo.`,
+        `Ninguém poderia resistir aos avanços de Cthulhu. A própria estrutura de Terraria parecia à beira da ruína. Finalmente, quando toda a esperança parecia perdida, a antiga raça das Dríades se ergueu para lutar contra Cthulhu. As Dríades, com sua conexão incomparável com o planeta, eram a verdadeira última esperança de Terraria, pois se uniram para salvar toda a vida da aniquilação.`,
+        `As Dríades, infelizmente, não conseguiram matar Cthulhu. No entanto, com o poder combinado das Dríades, elas conseguiram enfraquecer a capacidade de Cthulhu de causar ainda mais danos em Terraria, arrancando-lhe os olhos, parte de seu esqueleto e pedaços de seu cérebro. No fim, esse dano substancial forçou Cthulhu a recuar para o lado escuro da lua, onde permanece até hoje, reunindo forças para outra tentativa de conquista total. Quanto às Dríades, infelizmente, todas, exceto uma, pereceram... e o único sobrevivente não foi visto por muitos e muitos anos.`,
+        `Muito tempo se passou desde a Grande Guerra de Cthulhu. No entanto, rumores falam de um Culto Lunático liderado por um fanático fanático que busca metodicamente reavivar Cthulhu ao seu antigo poder e causar o fim do mundo. Como parte desses esforços, um gênio renomado – conhecido simplesmente como o Mecânico – foi sequestrado e forçado a reconstruir as partes necessárias para tornar Cthulhu inteiro novamente. Sussurros abafados falam dos resultados desses experimentos: horríveis simulacros mecânicos dos órgãos de Cthulhu. O Mecânico está quase concluindo seu trabalho, faltando apenas terminar o cérebro mecânico para restaurar Cthulhu ao seu pleno poder destrutivo.`,
+        `Viajantes que passam ouvem obras e gritos vindos do Calabouço — uma fortaleza maligna e demoníaca dos mortos na qual a Mecânica supostamente é mantida prisioneira enquanto realiza seu trabalho.Muitos em Terraria caíram sob a possessão do culto, incluindo o benevolente Ancião que supervisiona o Calabouço, uma cidade outrora próspera e cheia de vida, até que uma maldição levou todos os seus habitantes à loucura – vivendo além do ponto em que seus corpos apodreceram e eles se tornaram servos mortos-vivos irracionais do mal.`,
+        `Sem alguma intervenção, alguma força para conter essa maré, algum herói para salvar o dia, a ruína de Terraria está próxima! Isso nos leva à nossa aventura. Ela começa com você – de origem humilde e com o seu caminho revelado pelo fiel e misterioso Guia. Como campeão deste mundo, você receberá comunicações do mundo para ajudar a proteger sua missão. O mundo o trouxe a este local específico, neste momento específico – você se levantará e lutará por Terraria contra as sombras crescentes da destruição iminente?`];
 
-        if (generoF.checked) {
-            imgMasc.style.height = "192px";
-            imgMasc.style.width = "192px";
-            imgFem.style.height = "96px";
-            imgFem.style.width = "96px";
+
+    function msgGuia() {
+        mensagemC.innerHTML =
+            `
+            <div class="card">
+                <div id="msgTitulo" class="titulo">
+                </div>
+                <div id="msgG" class="mensagens">
+                </div>
+                <div class="botao">
+                    <button onClick="msgGuiaV()">Voltar</button>
+                    <button onClick="limpar()" style="color: red;">CANCELAR</button>
+                    <button onClick="msgGuiaA()">Ajuda</button>
+                </div>
+            </div>`
+        msgGuiaA();
+    }
+
+
+    function msgGuiaA() {
+        if (contador < 11) {
+            contador += 1;
         } else {
-            imgFem.style.height = "192px";
-            imgFem.style.width = "192px";
-            imgMasc.style.height = "96px";
-            imgMasc.style.width = "96px";
+            contador = 0;
         }
+        msgTitulo.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
+        msgG.innerHTML = `${listaMsg[contador]}`
+    }
+
+    function msgGuiaV() {
+        if (contador >= 1) {
+            contador -= 1;
+        } else {
+            contador = listaMsg.length - 1;
+        }
+        msgTitulo.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
+        msgG.innerHTML = `${listaMsg[contador]}`
+    }
+
+    function msgMago() {
+        mensagemCMago.innerHTML =
+            `
+        <div class="cardM">
+            <div id="msgTituloM" class="titulo">
+            </div>
+            <div id="msgM" class="mensagens">
+                </div>
+            <div class="botao">
+                <button onClick="msgGuiaV()">Voltar</button>
+                <button onClick="limpar()" style="color: red;">CANCELAR</button>
+                <button onClick="msgMagoA()">Ajuda</button>
+            </div>
+        </div>`
+    }
+
+
+    function msgMagoA() {
+        if (contador < 11) {
+            contador += 1;
+        } else {
+            contador = 0;
+        }
+        msgTituloM.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
+        msgM.innerHTML = `${listaMsg[contador]}`
+    }
+
+    function msgMagoV() {
+        if (contador >= 1) {
+            contador -= 1;
+        } else {
+            contador = listaMsg.length - 1;
+        }
+        msgTituloM.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
+        msgM.innerHTML = `${listaMsg[contador]}`
+    }
+    function limpar() {
+        mensagemC.innerHTML = ``;
+        mensagemCMago.innerHTML = ``;
     }
 </script>
