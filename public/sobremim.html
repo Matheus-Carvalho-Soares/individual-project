@@ -14,15 +14,17 @@
             <source src="./assets/videos/fundoEu.mp4" type="">
         </video>
         <header>
-
-            <a href="index.html">Voltar a pagina inicial.
-            </a>
+            <a class="exit"href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">X</a>
+            <a class="git" href="https://github.com/Matheus-Carvalho-Soares?tab=repositories" target="_blank"></a>
         </header>
 
-        <div class="cards">
+        <div id="cardsCima"class="cards">
             <div id="card1" class="card card1">
             </div>
-            <div class="mensagens">askpsdfkasdf</div>
+            <div class="mensagemFinal">
+                <div class="tituloM"></div>
+                <div class="mensagens"></div>
+            </div>
             <div id="card2" class="card card2">
 
             </div>
@@ -146,5 +148,61 @@
                 }, 3000);
             }
         }, 2000);
+
+        setTimeout(() => {
+            aboutMe();
+        }, 10000);
+    }
+
+    function aboutMe() {
+        var cont = 0;
+        var mensagens =
+            [
+                `
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Olá, ${sessionStorage.NOME}</div>
+                <div class="mensagens">Meu nome é Matheus Carvalho Soares, atualmente tenho 19 anos, sou residente de Praia Grande, e o meu tema do projeto individual, como você pode ver, é o jogo Terraria. Toda esta história acontecerá de forma automática, então sua única preocupação será entender sobre o por quê deste projeto surgir.</div>
+            </div>
+            `,
+                `
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Por quê Terraria? 1/4</div>
+                <div class="mensagens">O Terraria é um jogo que durante muitos anos da minha vida, acabou por ser extremamente importante como uma forma de se divertir durante tempos ruins. O jogo em si, acabou juntando inúmeras coisas nas quais eu ainda sou apaixonado, sendo elas artes pixelizadas, e RPG. Até hoje é um jogo que assim que tenho tempo livre, gosto de passar, ver como meus personagens estão, meus mundos, entre outras coisas.</div>
+            </div>
+            `,
+                `
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Por quê Terraria? 2/4</div>
+                <div class="mensagens">Durante uma aula no meu ensino médio, conheci uma pessoa chamada Matheus ( coincidência grande ), e ao compartilharmos hobbies, gostos, ele acabou me sugerindo o jogo, e por eu já ter interesse no tema, quando ele me falou sobre fiquei apaixoando. Minha primeira experiência no jogo foi no celular, o que não trouxe uma adaptabilidade muito grande. Com o tempo passando, eu comprei um PC.</div>
+            </div>`,
+                `
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Por quê Terraria? 3/4</div>
+                <div class="mensagens">Por muito tempo, joguei o jogo no computador, junto de alguns amigos, e cada vez era uma experiência mais divertida pois testar tudo, colecionar NPC's, itens raros, platinar o bestiário, sempre foi algo que demandou muito tempo e de forma não monótona, era cada vez algo diferente, e isso que sempre me chamou atenção no jogo.</div>
+            </div>`,
+                `
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Por quê Terraria? 4/4</div>
+                <div class="mensagens">Ao entrar na Etec, em 2022, as grandes responsabilidades começaram a surgir em minha vida, e os jogos sempre estiveram comigo como uma forma de válvula de escape para situações difíceis, como uma forma de relaxar. Conheci na Etec meu amigo Luiz, que durante os três anos, se reuníamos quase todo final de semana para jogarmos juntos, o que infelizmente não ocorre mais por conta de trabalhos, faculdades, então fazer um trabalho sobre este jogo me trás uma nostalgia na qual eu sentia falta.</div>
+            </div>`,
+                `    
+            <div class="mensagemFinal" style="width: 30%;">
+                <div class="tituloM" style="color: orange">Créditos</div>
+                <div class="mensagens">Agradeço as professoras Fernanda Caramico e Débora Flores, pelas instruções sobre o projeto, pois foi de grande desafio se encaixar dentro do mundo de estilização, um grande desafio pessoal e um prazer imenso ao ver o projeto tomando forma. Dito isso, muito obrigado pela atenção.</div>
+            </div>`
+
+
+            ]
+
+        var cima = document.getElementById('cardsCima');
+
+        var mensagemF = setInterval(() => {
+            if(cont > 5){
+                clearInterval(mensagemF);
+            } else{
+                cima.innerHTML = mensagens[cont];
+                cont++;
+            }
+        }, 5000);
     }
 </script>

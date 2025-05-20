@@ -10,11 +10,13 @@
 
 <body>
     <section class="guia">
+        <header>
+            <a class="exit" href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">X</a>
+            <a class="git" href="https://github.com/Matheus-Carvalho-Soares?tab=repositories" target="_blank"></a>
+        </header>
         <video autoplay muted loop class="video">
             <source src="./assets/videos/fundoCeu.mp4" type="">
         </video>
-        <a href="index.html">Voltar a pagina inicial.
-        </a>
         </div>
         <div id="mensagemC" class="msg">
         </div>
@@ -138,9 +140,9 @@
 
     function msgMagoA() {
 
-        if(contadorMago < jsonMago.length - 1){
+        if (contadorMago < jsonMago.length - 1) {
             contadorMago += 1;
-        } else{
+        } else {
             contadorMago = 0;
         }
         msgTituloM.innerHTML = jsonMago[contadorMago].titulo
@@ -148,9 +150,9 @@
     }
 
     function msgMagoV() {
-        if(contadorMago >= 1){
+        if (contadorMago >= 1) {
             contadorMago -= 1;
-        } else{
+        } else {
             contadorMago = jsonMago.length - 1;
         }
         msgTituloM.innerHTML = jsonMago[contadorMago].titulo
