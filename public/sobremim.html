@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="./css/sobremim.css">
+</head>
+
+<body>
+    <section class="eu">
+        <video autoplay muted loop class="video">
+            <source src="./assets/videos/fundoEu.mp4" type="">
+        </video>
+        <header>
+
+            <a href="index.html">Voltar a pagina inicial.
+            </a>
+        </header>
+
+        <div class="cards">
+            <div id="card1" class="card card1">
+            </div>
+            <div class="mensagens">askpsdfkasdf</div>
+            <div id="card2" class="card card2">
+
+            </div>
+        </div>
+        <div class="botao">
+            <div class="tituloNome">Matheus</div>
+            <button class="botaozinho" onClick="msgEu()"></button>
+        </div>
+        <div class="cards">
+            <div id="card3" class="card card3">
+
+            </div>
+            <div id="card4" class="card card4">
+
+            </div>
+        </div>
+        <footer>
+            <div class="esquerda">
+                <p>Matheus Soares - 2025; v1.0.0</p>
+                <div class="social">
+                    <a class="github" href=""></a>
+                    <a class="linkedin" href=""></a>
+                </div>
+            </div>
+        </footer>
+    </section>
+</body>
+
+</html>
+
+<script>
+    function msgEu() {
+        personagem();
+    }
+
+    function personagem() {
+        var contador = 0;
+        var card_1 = document.getElementById('card1');
+        var card_2 = document.getElementById('card2');
+        var card_3 = document.getElementById('card3');
+        var card_4 = document.getElementById('card4');
+        var card = document.getElementsByClassName('cards');
+        var personagens = setInterval(() => {
+            if (contador > 4) {
+                clearInterval(personagens);
+            }
+            contador += 1;
+            if (contador == 1) {
+                card_1.style.opacity = 1;
+                card_1.style.backgroundImage = "url('./assets/imgs/calamiao.png')"
+                setTimeout(() => {
+                    card_1.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 2) {
+                card_2.style.opacity = 1;
+                card_2.style.backgroundImage = "url('./assets/imgs/fefe.png')"
+                setTimeout(() => {
+                    card_2.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 3) {
+                card_3.style.opacity = 1;
+                card_3.style.backgroundImage = "url('./assets/imgs/limao.png')"
+                setTimeout(() => {
+                    card_3.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 4) {
+                card_4.style.opacity = 1;
+                card_4.style.backgroundImage = "url('./assets/imgs/limalegit.png')"
+                setTimeout(() => {
+                    card_4.style.opacity = 0;
+                }, 3000);
+            }
+        }, 2000);
+
+        setTimeout(() => {
+            mundos();
+        }, 10000);
+    }
+
+    function mundos() {
+        var contador = 0;
+        var card_1 = document.getElementById('card1');
+        var card_2 = document.getElementById('card2');
+        var card_3 = document.getElementById('card3');
+        var card_4 = document.getElementById('card4');
+        var card = document.getElementsByClassName('cards');
+        var mundos = setInterval(() => {
+            if (contador > 4) {
+                clearInterval(mundos);
+            }
+            contador += 1;
+            if (contador == 1) {
+                card_1.style.opacity = 1;
+                card_1.style.backgroundImage = "url('./assets/imgs/timeTerraria.png')"
+                setTimeout(() => {
+                    card_1.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 2) {
+                card_2.style.opacity = 1;
+                card_2.style.backgroundImage = "url('./assets/imgs/timeTmod.png')"
+                setTimeout(() => {
+                    card_2.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 3) {
+                card_3.style.opacity = 1;
+                card_3.style.backgroundImage = "url('./assets/imgs/mundo22.png')"
+                setTimeout(() => {
+                    card_3.style.opacity = 0;
+                }, 3000);
+            }
+            else if (contador == 4) {
+                card_4.style.opacity = 1;
+                card_4.style.backgroundImage = "url('./assets/imgs/mundo25.png')"
+                setTimeout(() => {
+                    card_4.style.opacity = 0;
+                }, 3000);
+            }
+        }, 2000);
+    }
+</script>

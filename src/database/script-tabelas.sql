@@ -12,7 +12,7 @@ USE Matherraria;
 CREATE TABLE usuario(
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
 nome VARCHAR(100),
-genero CHAR(1),
+genero VARCHAR(9),
 email VARCHAR(100),
 senha VARCHAR(100),
 dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP);

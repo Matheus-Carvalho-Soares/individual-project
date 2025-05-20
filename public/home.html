@@ -47,6 +47,7 @@
 
 <script>
     var contador = -1;
+    var contadorMago = -1;
     var listaMsg = [
         `Bem-vindo ao mundo de Terraria. Uma terra repleta de mistérios e maravilhas, com grande parte do seu destino deixado ao sabor das imaginações mais selvagens... no entanto, algumas lendas antigas chegaram até os nossos dias. Transmitidas por incontáveis ​​gerações da Ordem do Guia, estas poucas informações servirão para ajudá-lo a navegar em sua jornada e superar as ameaças que espreitam nas sombras. Este conhecimento agora é transmitido a você, o bravo aventureiro, com a esperança de que o ajude em sua jornada para salvar o nosso mundo...`,
         `No início, os Deuses estabeleceram um equilíbrio para garantir a justiça para todas as criaturas vivas. Esse equilíbrio seria de suma importância, sem nenhum custo muito alto para sua realização. Éons se passaram desde que os Deuses começaram a testar as complexidades da vida em seu experimento de justiça. Nesse processo, incontáveis ​​mundos vivos foram criados e agora existem dentro do universo de Terraria.`,
@@ -61,8 +62,24 @@
         `Viajantes que passam ouvem obras e gritos vindos do Calabouço — uma fortaleza maligna e demoníaca dos mortos na qual a Mecânica supostamente é mantida prisioneira enquanto realiza seu trabalho.Muitos em Terraria caíram sob a possessão do culto, incluindo o benevolente Ancião que supervisiona o Calabouço, uma cidade outrora próspera e cheia de vida, até que uma maldição levou todos os seus habitantes à loucura – vivendo além do ponto em que seus corpos apodreceram e eles se tornaram servos mortos-vivos irracionais do mal.`,
         `Sem alguma intervenção, alguma força para conter essa maré, algum herói para salvar o dia, a ruína de Terraria está próxima! Isso nos leva à nossa aventura. Ela começa com você – de origem humilde e com o seu caminho revelado pelo fiel e misterioso Guia. Como campeão deste mundo, você receberá comunicações do mundo para ajudar a proteger sua missão. O mundo o trouxe a este local específico, neste momento específico – você se levantará e lutará por Terraria contra as sombras crescentes da destruição iminente?`];
 
+    var jsonMago =
+        [
+            {
+                titulo: "Criadores",
+                msg: "Whitney Spinks: vice-presidente da Relogic<br>Yorai Omer: programador e designer<br>Chris Bednarz: programador<br>Victor Moura: responsável pelos gráficos do jogo.<br>James Hayes: responsável pelos gráficos do jogo.<br>Jim Kjexrud: responsável pelos gráficos do jogo.<br>Scott Lloyd Shelly: compositor da trilha sonora."
+            },
 
+            {
+                titulo: "Mercado",
+                msg: "Data de lançamento: 16/05/2011<br>Tamanho no mercado: 60 milhões de cópias vendidas.<br>Plataformas: Console e PC<br>Receita gerada: Aproximadamente 160 milhões de dólares.<br>"
+            },
+            {
+                titulo: "Comunidade",
+                msg: "Avaliação na Steam: Extremamente positiva (97,86% de avaliações positivas)<br>Quantidade de avaliações: 1 milhão+<br>Players simultâneos: 480.000<br>Jogadores ativos: 30.000<br>"
+            }
+        ]
     function msgGuia() {
+        contador = -1;
         mensagemC.innerHTML =
             `
             <div class="card">
@@ -81,7 +98,7 @@
 
 
     function msgGuiaA() {
-        if (contador < 11) {
+        if (contador < listaMsg.length - 1) {
             contador += 1;
         } else {
             contador = 0;
@@ -101,6 +118,7 @@
     }
 
     function msgMago() {
+        contadorMago = -1;
         mensagemCMago.innerHTML =
             `
         <div class="cardM">
@@ -109,32 +127,34 @@
             <div id="msgM" class="mensagens">
                 </div>
             <div class="botao">
-                <button onClick="msgGuiaV()">Voltar</button>
+                <button onClick="msgMagoV()">Voltar</button>
                 <button onClick="limpar()" style="color: red;">CANCELAR</button>
                 <button onClick="msgMagoA()">Ajuda</button>
             </div>
         </div>`
+        msgMagoA();
     }
 
 
     function msgMagoA() {
-        if (contador < 11) {
-            contador += 1;
-        } else {
-            contador = 0;
+
+        if(contadorMago < jsonMago.length - 1){
+            contadorMago += 1;
+        } else{
+            contadorMago = 0;
         }
-        msgTituloM.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
-        msgM.innerHTML = `${listaMsg[contador]}`
+        msgTituloM.innerHTML = jsonMago[contadorMago].titulo
+        msgM.innerHTML = jsonMago[contadorMago].msg;
     }
 
     function msgMagoV() {
-        if (contador >= 1) {
-            contador -= 1;
-        } else {
-            contador = listaMsg.length - 1;
+        if(contadorMago >= 1){
+            contadorMago -= 1;
+        } else{
+            contadorMago = jsonMago.length - 1;
         }
-        msgTituloM.innerHTML = `História: ${contador + 1} / ${listaMsg.length}`
-        msgM.innerHTML = `${listaMsg[contador]}`
+        msgTituloM.innerHTML = jsonMago[contadorMago].titulo
+        msgM.innerHTML = jsonMago[contadorMago].msg;
     }
     function limpar() {
         mensagemC.innerHTML = ``;

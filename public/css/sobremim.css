@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'terraria';
+    src: url('../assets/fonts/fonteterraria.TTF') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'terraria', sans-serif;
+    color: white;
+    text-shadow:
+        -1.5px -1.5px 0 black,
+        1.5px -1.5px 0 black,
+        -1.5px 1.5px 0 black,
+        1.5px 1.5px 0 black;
+}
+
+
+section {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+video {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+}
+
+header {
+    width: 100%;
+    height: 5%;
+}
+
+.cards {
+    transition: 0.5s;
+    width: 100%;
+    height: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+.cardMain {
+    padding: 0 3rem 0 3rem;
+    height: 50%;
+    width: 20%;
+    background-color: rgb(88, 122, 233, 0.5);
+    box-shadow:
+        0 0 0 2px black,
+        2px 2px 0 0 black,
+        -2px -2px 0 0 black,
+        -2px 2px 0 0 black,
+        2px -2px 0 0 black;
+}
+
+.card {
+    padding: 0 3rem 0 3rem;
+    height: 50%;
+    width: 20%;
+    background-color: rgb(88, 122, 233, 0.5);
+    box-shadow:
+        0 0 0 2px black,
+        2px 2px 0 0 black,
+        -2px -2px 0 0 black,
+        -2px 2px 0 0 black,
+        2px -2px 0 0 black;
+}
+
+.card1, .card2, .card3, .card4{
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+
+.botao {
+    width: 5%;
+    height: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao .tituloNome {
+    opacity: 0;
+    font-size: 1rem;
+}
+
+.botao:hover .tituloNome {
+    opacity: 1;
+}
+
+.botao .botaozinho {
+    opacity: 0;
+    height: 50%;
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+    height: 5%;
+}
