@@ -81,14 +81,3 @@ footer .esquerda{
 footer p {
     font-size: 2rem;
 }
-
-footer a.github {
-    background-image: url("../assets/imgs/github.png");
-    height: 48px;
-    width: 48px;
-}
-footer a.linkedin {
-    background-image: url("../assets/imgs/linkedin.png");
-    height: 48px;
-    width: 48px;
-}
