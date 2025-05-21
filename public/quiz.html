@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="./css/quiz.css">
+</head>
+
+<body>
+    <section class="quiz">
+        <video autoplay muted loop class="video">
+            <source src="./assets/videos/videoplayback.mp4" type="">
+        </video>
+        <div class="cardsQuiz">
+            <div id="perguntas" class="pergunta">
+                <h3>DESCUBRA SUA CLASSE! 1 / 7</h3>
+                <p>Em um combate a um chefão, qual sua preferência?</p>
+            </div>
+            <div id="alternativasP" class="alternativas">
+                <div class="row">
+                    <input type="radio" name="alt" id="a" checked>
+                    <p>Ter uma defesa mais alta, para aguentar mais dano.</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="b">
+                    <p>Me garantir em desviar dos projéteis e focar no dano de longe.</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="c">
+                    <p>Focar em debuffs, diminuindo a defesa do chefão para aumentar o dano.</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="d">
+                    <p>Ter uma defesa menor, mas um dano gigante.</p>
+                </div>
+
+            </div>
+            <div class="botoes">
+                <button onClick="avancar()">Próxima pergunta</button>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    var pergunta = 1;
+    var perguntasJson =
+    {
+        pergunta:
+            [`
+        <h3>DESCUBRA SUA CLASSE! 1 / 7</h3>
+        <p>Em um combate a um chefão, qual sua preferência?</p>
+        `,
+            `<h3>DESCUBRA SUA CLASSE! 2 / 7</h3>
+        <p>Qual dessas armas você prefere usar?</p>`,
+            `<h3>DESCUBRA SUA CLASSE! 3 / 7</h3>
+        <p>Qual seu estilo de jogo em grupo??</p>`,
+            `<h3>DESCUBRA SUA CLASSE! 4 / 7</h3>
+        <p>Como você distribui seus pontos de atributo no RPG?</p>`
+            ],
+        altA: [`Ter uma defesa mais alta, para aguentar mais dano.`, `Minions e chicotes.`, `Atirando de longe, com precisão.`, `Vida e defesa são a prioridade.`],
+        altB: [`Me garantir em desviar dos projéteis e focar no dano de longe.`, `Espadas e lanças.`, `Dano em área com feitiços.`, `Inteligência é o necessário.`],
+        altC: [`Focar em debuffs, diminuindo a defesa do chefão para aumentar o dano.`, `Arcos e bumerangues.`, `As invocações dão dano, eu só sobrevivo.`, `Dano e agilidade me basta.`],
+        altD: [`Ter uma defesa menor, mas um dano gigante.`, `Cajados e livros mágicos.`, `Linha de frente protegendo o grupo.`, `Vida o suficiente, e dano até demais.`],
+        respSummoner: ['d', 'a', 'c', 'a', 'a', 'a'],
+        respMelee: ['a', 'b', 'd', 'a', 'a', 'a'],
+        respRanged: ['b', 'c', 'a', 'a', 'a', 'a'],
+        respMago: ['c', 'd', 'b', 'a', 'a', 'a']
+    }
+    var countSummoner = 0;
+    var countMelee = 0;
+    var countRanged = 0;
+    var countMago = 0;
+    function avancar() {
+        var alt_A = document.getElementById('a');
+        var alt_B = document.getElementById('b');
+        var alt_C = document.getElementById('c');
+        var alt_D = document.getElementById('d');
+        var inputAlt = document.getElementsByName('alt');
+        var divPergunta = document.getElementById('perguntas');
+        divPergunta.innerHTML = perguntasJson.pergunta[pergunta];
+
+        var alternativas = document.getElementById('alternativasP');
+
+        alternativas.innerHTML =
+            `                <div class="row">
+                    <input type="radio" name="alt" id="a" checked>
+                    <p>${perguntasJson.altA[pergunta]}</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="b">
+                    <p>${perguntasJson.altB[pergunta]}</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="c">
+                    <p>${perguntasJson.altC[pergunta]}</p>
+                </div>
+                <div class="row">
+                    <input type="radio" name="alt" id="d">
+                    <p>${perguntasJson.altD[pergunta]}</p>
+                </div>
+        `
+
+        var escolhido = "";
+        for (var i = 0; i < inputAlt.length; i++) {
+            if (alt_A.checked) {
+                escolhido = 'a';
+            } else if (alt_B.checked) {
+                escolhido = 'b';
+            } else if (alt_C.checked) {
+                escolhido = 'c';
+            } else {
+                escolhido = 'd';
+            }
+        }
+
+        if (escolhido == perguntasJson.respSummoner[pergunta]) {
+            countSummoner += 1;
+        } else if (escolhido == perguntasJson.respMelee[pergunta]) {
+            countMelee += 1;
+        } else if (escolhido == perguntasJson.respRanged[pergunta]) {
+            countRanged += 1;
+        } else if (escolhido == perguntasJson.respMago[pergunta]) {
+            countMago += 1;
+        }
+
+        pergunta += 1;
+    }
+</script>
