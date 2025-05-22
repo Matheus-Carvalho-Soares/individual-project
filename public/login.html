@@ -40,7 +40,7 @@
             </div>
         </div>
         <footer>
-                <p>Matheus Soares - 2025</p>
+            <p>Matheus Soares - 2025</p>
         </footer>
     </section>
 </body>
@@ -75,8 +75,10 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
 
+
                     setTimeout(function () {
-                        sessionStorage.EMAIL  = emailVar;
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+                        sessionStorage.EMAIL = emailVar;
                         window.location = "index.html";
                     }, 1000);
 
