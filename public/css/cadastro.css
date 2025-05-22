@@ -40,6 +40,7 @@ body {
 .logo {
     height: 10%;
 }
+
 .cadastro {
     height: 75%;
     display: flex;
@@ -48,13 +49,14 @@ body {
     align-items: center;
 }
 
-.personagem{
+.personagem {
     height: 96px;
     width: 96px;
     background-image: url("../assets/imgs/mascPersonagem.png");
     background-repeat: no-repeat;
     background-size: contain;
 }
+
 .card {
     padding: 3rem;
     height: 50%;
@@ -159,7 +161,6 @@ button .cardP {
     width: 100%;
     height: 100%;
     background-color: rgb(88, 122, 233);
-    border: 2px solid black;
     box-shadow:
         0 0 0 2px black,
         2px 2px 0 0 black,
@@ -170,20 +171,18 @@ button .cardP {
 
 
 footer {
-    padding: 0 1rem 0 1rem;
-    height: 15%;
-}
-
-footer .esquerda {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    justify-content: flex-start;
-    width: 50%;
+    justify-content: flex-end;
+    width: 100%;
+    height: 15%;
 }
+
 
 footer p {
     font-size: 2rem;
+    color: white;
 }
 
 footer a.github {
@@ -191,6 +190,7 @@ footer a.github {
     height: 48px;
     width: 48px;
 }
+
 footer a.linkedin {
     background-image: url("../assets/imgs/linkedin.png");
     height: 48px;

@@ -10,18 +10,18 @@
 
 <body>
     <section class="index">
-        <video autoplay muted loop class = "video">
+        <video autoplay muted loop class="video">
             <source src="./assets/videos/videoplayback.mp4" type="">
         </video>
-        <div class="logo">
-            
+        <div id="head" class="header">
+
         </div>
-        <div class="content">
+        <div id="contentIndex" class="content">
             <a href="home.html">Home</a>
             <a href="cadastro.html">Criar personagem</a>
             <a href="login.html">Entrar em personagem</a>
             <a href="sobremim.html">Sobre mim</a>
-            <a href="dashboard.html">Dashboard</a>
+            <a onClick="verify()" style="cursor: pointer;">Quiz</a>
         </div>
         <footer>
             <p>Matheus Soares - 2025</p>
@@ -30,3 +30,22 @@
 </body>
 
 </html>
+
+<script>
+    function verify() {
+        var cont = document.getElementById('contentIndex')
+        var head = document.getElementById('head');
+        if (sessionStorage.EMAIL == undefined) {
+            cont.innerHTML = `           
+            <a href="home.html">Home</a>
+            <a href="cadastro.html">Criar personagem</a>
+            <a href="login.html">Entrar em personagem</a>
+            <a href="sobremim.html">Sobre mim</a>
+            <a onClick="verify()" style="color: red;">Quiz</a>`
+
+            head.innerHTML = `Você precisa estar logado para ter acesso ao quiz!`
+        } else {
+            window.location = "quiz.html"
+        }
+    }
+</script>
