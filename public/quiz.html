@@ -24,7 +24,7 @@
                     jogo! Ao fim do questionário, uma classe junto de uma breve descrição sobre o que ela é é
                     disponibilizada para você! Bom aproveitamento.</div>
             </div>
-            <div id ="botoeszinhos"class="botoes">
+            <div id="botoeszinhos" class="botoes">
                 <button onClick="avancar()">Próxima pergunta</button>
             </div>
         </div>
@@ -35,6 +35,7 @@
 
 <script>
     var pergunta = 0;
+    var classeFinal = "";
     var perguntasJson =
     {
         pergunta:
@@ -117,22 +118,59 @@
             divPergunta.style.fontSize = "2rem";
             alternativas.style.fontSize = "2rem";
             if (countSummoner > (countMago && countMelee && countRanged)) {
+                classeFinal = 1
                 divPergunta.innerHTML = `Sua classe escolhida foi: Summoner.`
                 alternativas.innerHTML = `Você não gosta de tomar riscos, e por isso prefere uma classe mais consistente, que depende apenas de você, sua habilidade de desviar e suas invocações te obedecerem. É uma classe com uma defesa pequena, mas em compensação, suas invocações causam um dano excepcional, que acaba equilibrando.`
 
             } else if (countRanged > (countSummoner && countMelee && countMago)) {
+                classeFinal = 2
                 divPergunta.innerHTML = `Sua classe escolhida foi: Ranged.`
                 alternativas.innerHTML = `Você prefere a consistência de dano junto de uma defesa razoavel ao invés de um dano mais explosivo sem defesa nenhum. Com ataques a distância e mais estratégicos, é possível notar que toda sua jogatina se baseia mais no pensamento do que na impulsividade.`
 
             } else if (countMelee > (countSummoner && countMago && countRanged)) {
+                classeFinal = 3
                 divPergunta.innerHTML = `Sua classe escolhida foi: Melee.`
                 alternativas.innerHTML = `Você gosta de uma zona de conforto, onde alguns ataques não vão te fazer tão mal, com uma gama diversificada de formas de atacar seu inimigo. O dano não é sua prioridade, e sim a sobrevivência ao longo da batalha, não importa o tempo que levar a vitória é garantida.`
 
             } else {
+                classeFinal = 4
                 divPergunta.innerHTML = `Sua classe escolhida foi: Mago.`
                 alternativas.innerHTML = `Você valoriza o poder bruto e a versatilidade, mesmo que isso signifique ter que lidar com uma defesa frágil. Seus feitiços poderosos e variados são capazes de mudar o rumo de uma batalha em instantes. Sua jogabilidade exige atenção e planejamento, pois um erro pode ser fatal — mas o acerto certo pode ser devastador.`
             }
-            botaoFim.innerHTML = `<button onClick="window.location = 'index.html'" style="width: 10rem;">FIM</button>`
+            botaoFim.innerHTML = `<button onClick="quizBD()" style="width: 10rem;">FIM</button>`
         }
     }
+
+    function quizBD() {
+        var id = sessionStorage.ID_USUARIO;
+        fetch("/class/quiz", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idServer: id,
+                quizServer: classeFinal
+            }),
+        })
+            .then(function (quizResp) {
+                console.log("resposta: ", quizResp);
+                if (quizResp.ok) {
+
+                    console.log("classe inserida no banco de dados")
+
+                    setTimeout(() => {
+                        window.location = "index.html";
+                    }, "2000");
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (quizResp) {
+                console.log(`#ERRO: ${quizResp}`);
+            });
+        return false;
+
+    }
+
 </script>
