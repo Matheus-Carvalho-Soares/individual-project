@@ -10,15 +10,13 @@
 
 <body>
     <section class="eu">
-        <video autoplay muted loop class="video">
-            <source src="./assets/videos/fundoEu.mp4" type="">
-        </video>
+        <div id="teste" class="fundoWallpaper">
+        </div>
         <header>
-            <a class="exit"href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">X</a>
-            <a class="git" href="https://github.com/Matheus-Carvalho-Soares?tab=repositories" target="_blank"></a>
+            <a class="exit" href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">X</a>
         </header>
 
-        <div id="cardsCima"class="cards">
+        <div id="cardsCima" class="cards">
             <div id="card1" class="card card1">
             </div>
             <div class="mensagemFinal">
@@ -26,29 +24,28 @@
                 <div class="mensagens"></div>
             </div>
             <div id="card2" class="card card2">
-
             </div>
         </div>
         <div class="botao">
-            <div class="tituloNome">Matheus</div>
-            <button class="botaozinho" onClick="msgEu()"></button>
+            <button onClick="left()">
+                <div class="leftArrow"></div>
+            </button>
+            <div class="perso">
+                <div class="tituloNome">Matheus</div>
+                <button class="botaozinho" onClick="msgEu()"></button>
+            </div>
+            <button onClick="right()">
+                <div class="rightArrow"></div>
+            </button>
         </div>
         <div class="cards">
             <div id="card3" class="card card3">
-
             </div>
             <div id="card4" class="card card4">
-
             </div>
         </div>
         <footer>
-            <div class="esquerda">
-                <p>Matheus Soares - 2025; v1.0.0</p>
-                <div class="social">
-                    <a class="github" href=""></a>
-                    <a class="linkedin" href=""></a>
-                </div>
-            </div>
+            <p>Matheus Soares - 2025; v1.0.0</p>
         </footer>
     </section>
 </body>
@@ -56,6 +53,52 @@
 </html>
 
 <script>
+
+    var countWallpaper = 0;
+
+    var fundoAboutMe =
+    {
+        imgWallpaper: ["url('./assets/imgs/fefeImg.png')", "url('./assets/imgs/limaoImg.png')", "url('./assets/imgs/limalegitImg.png')"],
+        tituloMundo: ["levinho", "calamity thorium e fargo", "estrangeiro comoro"],
+        dataMundo: ["09/05/2025", "02/04/2023", "16/07/2022"],
+        nomePerso: ["fefe do grau", "limalegit", "limao"],
+        tempoPerso: ["29:27:31", "38:11:03", "46:49:47"]
+    }
+
+    function left() {
+        if (countWallpaper <= 0) {
+            countWallpaper = 2;
+        } else {
+            countWallpaper -= 1;
+        }
+        alterDiv();
+    }
+
+    function right() {
+        if (countWallpaper >= 2) {
+            countWallpaper = 0;
+        } else {
+            countWallpaper += 1;
+        }
+        alterDiv();
+    }
+
+    function alterDiv() {
+        var img = document.getElementById('teste');
+        var cima = document.getElementById('cardsCima');
+
+        teste.style.backgroundImage = fundoAboutMe.imgWallpaper[countWallpaper];
+        cima.innerHTML = `      
+                    <div id="card1" class="card card1">
+            </div>          
+                <div class="mensagemFinal" style = "width: 30%;">
+                <div class="tituloM" style="color: orange">MUNDO: ${fundoAboutMe.tituloMundo[countWallpaper].toUpperCase()}</div>
+                <div class="mensagens">INFORMAÇÕES<br>Criação do mundo: ${fundoAboutMe.dataMundo[countWallpaper]}<br>Personagem jogado: ${fundoAboutMe.nomePerso[countWallpaper]}<br>Horas de jogo: ${fundoAboutMe.tempoPerso[countWallpaper]}</div>
+                </div> 
+                            <div id="card2" class="card card2">
+            </div>`
+    }
+
     function msgEu() {
         personagem();
     }
@@ -151,7 +194,7 @@
 
         setTimeout(() => {
             aboutMe();
-        }, 10000);
+        }, 8000);
     }
 
     function aboutMe() {
@@ -197,9 +240,10 @@
         var cima = document.getElementById('cardsCima');
 
         var mensagemF = setInterval(() => {
-            if(cont > 5){
+            if (cont > 5) {
                 clearInterval(mensagemF);
-            } else{
+                window.location = "index.html"
+            } else {
                 cima.innerHTML = mensagens[cont];
                 cont++;
             }

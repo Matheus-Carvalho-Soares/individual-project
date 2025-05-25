@@ -153,9 +153,9 @@
                 quizServer: classeFinal
             }),
         })
-            .then(function (quizResp) {
-                console.log("resposta: ", quizResp);
-                if (quizResp.ok) {
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+                if (resposta.ok) {
 
                     console.log("classe inserida no banco de dados")
 
@@ -166,9 +166,13 @@
                     throw "Houve um erro ao tentar realizar o cadastro!";
                 }
             })
-            .catch(function (quizResp) {
-                console.log(`#ERRO: ${quizResp}`);
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
             });
+
+            setTimeout(() => {
+                window.location = "index.html"
+            }, 3000);
         return false;
 
     }

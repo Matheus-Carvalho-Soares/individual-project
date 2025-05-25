@@ -23,7 +23,7 @@ function checkClass(req, res) {
                 function (erro) { // reza pra nao dar erro
                     console.log(erro);
                     console.log(
-                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        "\nHouve um erro ao realizar o select! Erro: ",
                         erro.sqlMessage
                     );
                     res.status(500).json(erro.sqlMessage);

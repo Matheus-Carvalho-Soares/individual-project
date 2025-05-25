@@ -21,6 +21,7 @@
             <a href="cadastro.html">Criar personagem</a>
             <a href="login.html">Entrar em personagem</a>
             <a href="sobremim.html">Sobre mim</a>
+            <a href="wasted.html">Wasted on Games!</a>
             <a onClick="verify()" style="cursor: pointer;">Quiz</a>
         </div>
         <footer>
@@ -37,11 +38,26 @@
             <a href="home.html">História</a>
             <a href="cadastro.html">Criar personagem</a>
             <a href="sobremim.html">Sobre mim</a>
+            <a href="wasted.html">Wasted on Games!</a>
             <a onClick="verify()" style="cursor: pointer;">Quiz</a>
             <button onClick="limpar()">Sair!</button>
         </div>`
         head.innerHTML = `<p>Olá, ${sessionStorage.NOME}, bem vindo ao meu site!<br> Acesse nosso quiz, e descubra qual classe mais combina com o seu tipo de jogo!<p>`
     }
+
+    if (sessionStorage.EMAIL == "teteudonodosite@gmail.com") {
+        contentIndex.innerHTML =
+            `
+                    <a href="home.html">História</a>
+            <a href="cadastro.html">Criar personagem</a>
+            <a href="login.html">Entrar em personagem</a>
+            <a href="sobremim.html">Sobre mim</a>
+            <a href="wasted.html">Wasted on Games!</a>
+            <a onClick="verify()" style="cursor: pointer;">Quiz</a>
+            <a href="dashboard.html" style="cursor: pointer;">Dashboard</a>
+        `
+    }
+
 
     function limpar() {
         sessionStorage.clear();
@@ -58,21 +74,23 @@
         var head = document.getElementById('head');
         if (sessionStorage.EMAIL == undefined) {
             cont.innerHTML = `           
-            <a href="home.html">Home</a>
+            <a href="home.html">História</a>
             <a href="cadastro.html">Criar personagem</a>
             <a href="login.html">Entrar em personagem</a>
             <a href="sobremim.html">Sobre mim</a>
-            <a onClick="verify()" style="color: red;">Quiz</a>`
+            <a href="wasted.html">Wasted on Games!</a>
+            <a onClick="verify()" style="cursor: pointer; color: red">Quiz</a>`
 
             head.innerHTML = `Você precisa estar logado para ter acesso ao quiz!`
 
             setInterval(() => {
                 head.innerHTML = ``;
                 cont.innerHTML = `           
-            <a href="home.html">História</a>
+                    <a href="home.html">História</a>
             <a href="cadastro.html">Criar personagem</a>
             <a href="login.html">Entrar em personagem</a>
             <a href="sobremim.html">Sobre mim</a>
+            <a href="wasted.html">Wasted on Games!</a>
             <a onClick="verify()" style="color: rgb(120, 120, 120);">Quiz</a>`
 
             }, 5000);

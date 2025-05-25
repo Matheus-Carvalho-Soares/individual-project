@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="./css/wasted.css">
+</head>
+
+<body>
+    <section class="main">
+        <video autoplay muted loop class="video">
+            <source src="./assets/videos/videoplayback.mp4" type="">
+        </video>
+        <header>
+            <a class="exit" href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">PÁGINA INICIAL</a>
+        </header>
+        <div class="card">
+            <div class="inputCard">
+                <h1>Insira a quantidade de horas que você tem em uma atividade.</h1>
+                <input id="numHoras" class="cardInput" type="number" placeholder="36.5">
+                <button onClick="calcular()">How many time have i wasted?</button>
+            </div>
+            <div id="resp" class="resposta">
+                <div class="titulo"></div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
+
+<script>
+    function calcular() {
+        var horas = Number(numHoras.value);
+        var dias = horas / 24;
+        var diasAula = horas / 6;
+        var sprints = horas / 24 / 41;
+
+        resp.innerHTML =
+            `
+                        <div class="titulo">Quanto você investiu, em métricas diferentes?</div>
+                        Horas: ${horas}<br>Dias: ${dias.toFixed(4)}<br>Aulas na SPTech: ${diasAula.toFixed(4)}<br>Sprints SPTech (Aprox. 40 dias cada.): ${sprints.toFixed(4)}<br>Páginas de livro lidas: ${horas * 50}<br>Livros lidos: ${(horas * 50 / 300).toFixed(4)}<br>Filmes vistos no cinema: ${(horas / 110 * 60).toFixed(4)}<br>Kilômetros corridos: ${(horas / 60 * 7).toFixed(4)}
+        `
+    }
+</script>

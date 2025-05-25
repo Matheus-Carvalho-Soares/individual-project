@@ -40,7 +40,10 @@ section {
     align-items: center;
 }
 
-video {
+.fundoWallpaper {
+    background-image: url("../assets/imgs/fefeImg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
     margin: 0;
     width: 100%;
     height: 100vh;
@@ -73,7 +76,7 @@ header a.exit {
     left: 2rem;
 }
 
-header a.git{
+header a.git {
     background-image: url("../assets/imgs/github.png");
     background-size: contain;
     background-repeat: no-repeat;
@@ -153,12 +156,17 @@ header a.git{
 }
 
 .botao {
-    width: 5%;
-    height: 20%;
+    width: 15%;
+    height: 10%;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
+}
+
+.botao button{
+    border: 0;
+    background-color: transparent;
 }
 
 .botao .tituloNome {
@@ -170,9 +178,33 @@ header a.git{
     opacity: 1;
 }
 
+.perso{
+    height: 100%;
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.leftArrow{
+    background-image: url("../assets/imgs/left-arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
+}
+
+.rightArrow{
+    background-image: url("../assets/imgs/right-arrow.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 60px;
+    width: 60px;
+}
+
 .botao .botaozinho {
     opacity: 0;
-    height: 50%;
+    height: 100%;
     width: 100%;
 }
 

@@ -13,6 +13,7 @@
         <header>
             <a class="exit" href="index.html" style="text-decoration: none; color: red; font-size: 3rem;">X</a>
             <a class="git" href="https://github.com/Matheus-Carvalho-Soares?tab=repositories" target="_blank"></a>
+            <button class="tooltip" onClick="dica()">?</div>
         </header>
         <video autoplay muted loop class="video">
             <source src="./assets/videos/fundoCeu.mp4" type="">
@@ -21,8 +22,9 @@
         <div id="mensagemC" class="msg">
         </div>
         <div class="botao">
+            <div class="imagemSeta"></div>
             <button class="botaozinho" onClick="msgGuia()"></button>
-            <img src="./assets/imgs/down_arrow.png" alt="">
+            <div class="imagemSeta"></div>
         </div>
     </section>
     <section class="mago">
@@ -81,6 +83,23 @@
                 msg: "Avaliação na Steam: Extremamente positiva (97,86% de avaliações positivas)<br>Quantidade de avaliações: 1 milhão+<br>Players simultâneos: 480.000<br>Jogadores ativos: 30.000<br>"
             }
         ]
+
+
+    function dica() {
+        mensagemC.innerHTML =
+            `
+            <div class="card" style="height: 50%;">
+                <div id="msgTitulo" class="titulo">
+                    Como usar o site?
+                </div>
+                <div id="msgG" class="mensagens">
+                    Olá, usuario. Dentro desta home, a interatividade do usuário ocorre via "Click" nos personagens, sendo eles o Guia, contando a história do jogo, e o Mago, na parte de baixo da página, trazendo informações do mercado do jogo. Para melhor visualização, foram colocadas duas setas envolta do personagem principal, e ao clicar a história é iniciada. Bom aproveitamento!
+                </div>
+                <div class="botao">
+                    <button onClick="limpar()" style="color: red;">FECHAR</button>
+                </div>
+            </div>`
+    }
     function msgGuia() {
         contador = -1;
         mensagemC.innerHTML =
@@ -92,8 +111,8 @@
                 </div>
                 <div class="botao">
                     <button onClick="msgGuiaV()">Voltar</button>
-                    <button onClick="limpar()" style="color: red;">CANCELAR</button>
-                    <button onClick="msgGuiaA()">Ajuda</button>
+                    <button onClick="limpar()" style="color: red;">FECHAR</button>
+                    <button onClick="msgGuiaA()">Avançar</button>
                 </div>
             </div>`
         msgGuiaA();
@@ -131,8 +150,8 @@
                 </div>
             <div class="botao">
                 <button onClick="msgMagoV()">Voltar</button>
-                <button onClick="limpar()" style="color: red;">CANCELAR</button>
-                <button onClick="msgMagoA()">Ajuda</button>
+                <button onClick="limpar()" style="color: red;">FECHAR</button>
+                <button onClick="msgMagoA()">Avançar</button>
             </div>
         </div>`
         msgMagoA();

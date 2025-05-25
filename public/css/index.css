@@ -72,12 +72,12 @@ body {
         1.5px -1.5px 0 black,
         -1.5px 1.5px 0 black,
         1.5px 1.5px 0 black;
-    transition: 1s;
+    transition: 0.8s;
 }
 
 .content a:hover {
     font-size: 5rem;
-    color: rgb(184, 164, 56);
+    color: gold;
 }
 
 
@@ -124,5 +124,5 @@ button {
 }
 
 button:hover {
-    color: rgb(184, 164, 56);
+    color: gold;
 }

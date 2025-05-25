@@ -40,6 +40,28 @@ header {
     box-sizing: border-box;
 }
 
+
+
+header button{
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+    font-family: 'terraria', sans-serif;
+    color: white;
+    text-shadow:
+        -1.5px -1.5px 0 black,
+        1.5px -1.5px 0 black,
+        -1.5px 1.5px 0 black,
+        1.5px 1.5px 0 black;
+    position: absolute;
+    justify-self: center;
+    align-self: center;
+    font-size: 3rem;
+    color: red;
+    left: 50%;
+    top: 2rem;
+}
+
 header a {
     position: absolute;
     text-decoration: none;
@@ -94,16 +116,23 @@ a {
     color: red;
 }
 
+.imagemSeta {
+    background-image: url("../assets/imgs/seta.png");
+    background-size: cover;
+    width: 72px;
+    height: 32px;
+}
+
 .botao {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     height: 70%;
     width: 100%;
 }
 
-.botao img{
+.botao img {
     height: 6rem;
     width: 4rem;
 }
@@ -111,7 +140,6 @@ a {
 
 .botao .botaozinho {
     cursor: pointer;
-    align-self: center;
     width: 5rem;
     height: 5rem;
     opacity: 0;
@@ -128,7 +156,7 @@ a {
 
 .msg .card {
     padding: 0 3rem 0 3rem;
-    height: 60%;
+    height: 80%;
     width: 30%;
     background-color: rgb(88, 122, 233, 0.5);
     box-shadow:
@@ -235,6 +263,7 @@ footer .esquerda {
 }
 
 .mago .botao .botaozinho {
+    align-self: flex-start;
     margin-left: 20%;
     cursor: pointer;
 }
@@ -249,7 +278,7 @@ footer .esquerda {
 
 .msg .cardM {
     padding: 0 3rem 0 3rem;
-    height: 70%;
+    height: 80%;
     width: 30%;
     background-color: rgb(88, 122, 233, 0.5);
     box-shadow:
@@ -278,7 +307,7 @@ footer .esquerda {
 
 .cardM .botao {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-evenly;
     height: 15%;
 }
