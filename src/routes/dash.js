@@ -3,8 +3,13 @@ var router = express.Router();
 
 var dashController = require("../controllers/dashController");
 
-router.get("/grafico", function (req, res) {
+router.get("/classes", function (req, res) {
     dashController.dadosClasse(req, res);
 });
+
+router.get("/fezQuiz", function (req, res) {
+    dashController.dadosCadastro(req, res);
+});
+
 
 module.exports = router;

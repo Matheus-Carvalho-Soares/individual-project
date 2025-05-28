@@ -5,7 +5,7 @@
 /*
 comandos para mysql server
 */
-
+DROP DATABASE Matherraria;
 CREATE DATABASE Matherraria;
 USE Matherraria;
 
@@ -23,7 +23,7 @@ classe VARCHAR(10));
 
 CREATE TABLE res_quiz(
 id INT PRIMARY KEY AUTO_INCREMENT,
-fkUsuario INT UNIQUE AUTO_INCREMENT,
+fkUsuario INT UNIQUE,
 fkPersonalidade INT,
 CONSTRAINT fk_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 CONSTRAINT fk_classe FOREIGN KEY (fkPersonalidade) REFERENCES personalidade(idClasse),
@@ -38,7 +38,11 @@ INSERT INTO personalidade (classe) VALUES
 select * from res_quiz;
 select * from usuario;
 
-select u.idUsuario, u.nome, p.classe, r.dtRegistro FROM usuario u
-JOIN res_quiz r ON r.fkUsuario = u.idUsuario
-JOIN personalidade p ON p.idClasse = r.fkPersonalide; 
 
+select count(fkUsuario) from res_quiz;
+
+select count(idUsuario) from usuario where idUsuario NOT IN (select fkUsuario from res_quiz); 
+
+select count(fkUsuario) as FezQuiz, (select count(idUsuario) from usuario)-(count(fkUsuario)) as 'Diferença' from res_quiz;
+
+select count(fkUsuario) Fezquiz, t.Total - count(fkUsuario) as Diferença from (select count(idUsuario) as Total from usuario) as t join res_quiz;

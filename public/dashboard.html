@@ -18,7 +18,10 @@
                 <div class="card">a</div>
                 <div class="card">a</div>
             </div>
-            <canvas id="myChartCanvas" class="canva"></canvas>
+            <div class="plotarGraficos">
+                <canvas id="graficoClasse" class="canva"></canvas>
+                <canvas id="graficoQuiz" class="canva"></canvas>
+            </div>
         </div>
     </section>
 </body>
@@ -28,12 +31,27 @@
 </html>
 <script>
     function obterDadosGrafico() {
-        fetch(`/grafico/grafico`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/grafico/classes`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
-                    plotarGrafico(resposta);
+                    plotarGraficoClasse(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+        fetch(`/grafico/fezQuiz`, { cache: 'no-store' }).then(function (responseQuiz) {
+            if (responseQuiz.ok) {
+                responseQuiz.json().then(function (respostaQuiz) {
+                    console.log(`Dados recebidos: ${JSON.stringify(respostaQuiz)}`);
+                    respostaQuiz.reverse();
+                    plotarGraficoQuiz(respostaQuiz);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -47,7 +65,7 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta) {
+    function plotarGraficoClasse(resposta) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -61,14 +79,15 @@
                 label: 'classes',
                 data: [],
                 fill: false,
-                borderColor: 'rgb(75, 192, 192)',
+                borderColor: 'rgb(0, 0, 0)',
                 tension: 0.1
-            }]
+            },]
         };
 
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
+        console.log(resposta);
+        console.log(resposta);
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
@@ -79,9 +98,9 @@
 
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
+        console.log('Labels Classe:')
         console.log(labels)
-        console.log('Dados:')
+        console.log('Dados Classe:')
         console.log(dados.datasets)
         console.log('----------------------------------------------')
 
@@ -92,9 +111,68 @@
         };
 
         // Adicionando gráfico criado em div na tela
-        let myChart = new Chart(
-            document.getElementById(`myChartCanvas`),
+        let chartClass = new Chart(
+            document.getElementById(`graficoClasse`),
             config
+        );
+    }
+
+    function plotarGraficoQuiz(respostaQuiz) {
+
+        console.log('iniciando plotagem do gráfico...');
+        // Criando estrutura para plotar gráfico - labels
+        let labelsQuiz = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dadosQuiz = {
+            labels: labelsQuiz,
+            datasets: [{
+                label: 'fez',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(120, 120, 120)',
+                tension: 0.1
+            },
+            {
+                label: 'nao fez',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(99, 50, 250)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(respostaQuiz);
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        var arrayRegistro = respostaQuiz[0];
+
+        labelsQuiz.push("fez");
+        labelsQuiz.push("nao fez");
+        dadosQuiz.datasets[0].data.push(arrayRegistro.Fezquiz);
+        dadosQuiz.datasets[1].data.push(arrayRegistro.Diferença);
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels Quiz:');
+        console.log(labelsQuiz);
+        console.log('Dados Quiz:');
+        console.log(dadosQuiz.datasets);
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+
+        const configQuiz = {
+            type: 'pie',
+            data: dadosQuiz,
+        };
+
+        // Adicionando gráfico criado em div na tela
+        let chartQuiz = new Chart(
+            document.getElementById(`graficoQuiz`),
+            configQuiz
         );
     }
 
