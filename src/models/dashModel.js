@@ -14,7 +14,7 @@ JOIN res_quiz r ON p.idClasse = r.fkPersonalidade GROUP BY p.classe;
 function dadosCadastro() {
 
     var instrucaoSql =
-        `select count(fkUsuario) Fezquiz, t.Total - count(fkUsuario) as Diferença from (select count(idUsuario) as Total from usuario) as t join res_quiz;`
+        `select count(fkUsuario) as FezQuiz, (select count(idUsuario) from usuario)-(count(fkUsuario)) as 'Diferença' from res_quiz;`
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);

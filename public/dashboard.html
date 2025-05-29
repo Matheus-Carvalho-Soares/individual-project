@@ -70,16 +70,41 @@
         console.log('iniciando plotagem do gráfico...');
 
         // Criando estrutura para plotar gráfico - labels
-        let labels = [];
+        let labels = ["Melee", "Ranged", "Summoner", "Mago"];
 
         // Criando estrutura para plotar gráfico - dados
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'classes',
+                label: 'Melee',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(255, 165, 0)',
+                tension: 0.1
+            },
+            {
+                label: 'Ranged',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(137, 243, 169)',
+                tension: 0.1
+            },
+            {
+                label: 'Summoner',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(98, 196, 235)',
+                tension: 0.1
+            },
+            {
+                label: 'Mago',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(0, 0, 0)',
+                backgroundColor: 'rgb(128, 0, 128)',
                 tension: 0.1
             },]
         };
@@ -92,10 +117,12 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.classe);
-            dados.datasets[0].data.push(registro.qtd);
-        }
+            let indexClasse = labels.indexOf(registro.classe);
 
+            if (indexClasse != -1) {
+                dados.datasets[indexClasse].data[indexClasse] = registro.qtd;
+            }
+        }
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
         console.log('Labels Classe:')
@@ -121,23 +148,17 @@
 
         console.log('iniciando plotagem do gráfico...');
         // Criando estrutura para plotar gráfico - labels
-        let labelsQuiz = [];
-
-        // Criando estrutura para plotar gráfico - dados
+        var participouQuiz = respostaQuiz[0].FezQuiz;
+        var naoParticipouQuiz = respostaQuiz[0].Diferença;
+        let labelsQuiz = ["Participante do Quiz", "Não participante"];
         let dadosQuiz = {
             labels: labelsQuiz,
             datasets: [{
-                label: 'fez',
-                data: [],
+                label: 'Informações Quiz',
+                data: [participouQuiz, naoParticipouQuiz],
                 fill: false,
-                borderColor: 'rgb(120, 120, 120)',
-                tension: 0.1
-            },
-            {
-                label: 'nao fez',
-                data: [],
-                fill: false,
-                borderColor: 'rgb(99, 50, 250)',
+                backgroundColor: ['rgb(137, 243, 169)', 'rgb(98, 196, 235)'],
+                borderColor: 'rgb(0, 0, 0)',
                 tension: 0.1
             }]
         };
@@ -145,14 +166,6 @@
         console.log('----------------------------------------------')
         console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
         console.log(respostaQuiz);
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        var arrayRegistro = respostaQuiz[0];
-
-        labelsQuiz.push("fez");
-        labelsQuiz.push("nao fez");
-        dadosQuiz.datasets[0].data.push(arrayRegistro.Fezquiz);
-        dadosQuiz.datasets[1].data.push(arrayRegistro.Diferença);
 
         console.log('----------------------------------------------')
         console.log('O gráfico será plotado com os respectivos valores:')
