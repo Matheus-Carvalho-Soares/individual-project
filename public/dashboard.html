@@ -11,19 +11,51 @@
 
 <body onLoad="obterDadosGrafico()">
     <section class="dash">
-        <div class="login">asdfasdf</div>
+        <div class="login">
+            <div class="introducaoAdmin">
+                <div class="cardImg"></div>
+                <div class="tituloHello">Seja bem vindo, Matheus!</div>
+            </div>
+            <div class="botoes">
+                <button onClick="window.location = 'index.html'">Home</button>
+            </div>
+
+            <div class="sair">
+                <button onClick="logout()">Sair!</button>
+            </div>
+        </div>
         <div class="grafico">
             <div class="kpis">
-                <div class="card">a</div>
-                <div class="card">a</div>
-                <div class="card">a</div>
+                <div class="card">
+                    <div class="titulo">Classe mais comum:</div>
+                    <div id="comum" class="kpi"></div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Classe menos comum: </div>
+                    <div id="menosComum" class="kpi"></div>
+                </div>
+                <div class="card">
+                    <div class="titulo">Taxa de participação do quiz:</div>
+                    <div id="usoQuiz" class="kpi"></div>
+                </div>
             </div>
-            <div class="plotarGraficos">
-                <canvas id="graficoClasse" class="canva"></canvas>
-                <canvas id="graficoQuiz" class="canva"></canvas>
+
+            <div class="plotGrafico">
+                <div class="graficos">
+                    <div class="graficoBarra">
+                        <canvas id="graficoClasse" width="500px" height="500px"></canvas>
+                    </div>
+
+                    <div class="graficoPizza">
+                        <canvas id="graficoQuiz" width="500px" height="500px"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+
+
 </body>
 
 </html>
@@ -142,6 +174,41 @@
             document.getElementById(`graficoClasse`),
             config
         );
+        var maior = -1;
+        var menor = Infinity;
+        var indiceMaior = 0;
+        var indiceMenor = 0;
+        for (var i = 0; i < dados.datasets.length; i++) {
+            if (dados.datasets[i].data.length > maior) {
+                maior = dados.datasets[i].data.length;
+                indiceMaior = i;
+                console.log(`maior: indice ${i}; numero ${maior}`)
+            }
+            if (dados.datasets[i].data.length < menor) {
+                menor = dados.datasets[i].data.length;
+                indiceMenor = i;
+                console.log(`menor: indice ${i}; numero ${menor}`)
+            }
+        }
+        var msgMenor = "";
+        var msgMaior = ""
+        if (maior == 1 || menor == 1) {
+            if (maior == 1) {
+                msgMaior = "usuário."
+            } else {
+                msgMaior = "usuários."
+            }
+            if (menor == 1) {
+                msgMenor = "usuário."
+            } else {
+                msgMenor = "usuários."
+            }
+        } else {
+            msgMaior = "usuários."
+            msgMenor = "usuários."
+        }
+        comum.innerHTML = `${dados.datasets[indiceMaior].label} (${maior} ${msgMaior})`
+        menosComum.innerHTML = `${dados.datasets[indiceMenor].label} (${menor} ${msgMenor})`
     }
 
     function plotarGraficoQuiz(respostaQuiz) {
@@ -187,6 +254,10 @@
             document.getElementById(`graficoQuiz`),
             configQuiz
         );
+
+        console.log(participouQuiz);
+        console.log(naoParticipouQuiz);
+        usoQuiz.innerHTML = `${(participouQuiz / (participouQuiz + naoParticipouQuiz) * 100).toFixed(2)}%`
     }
 
 </script>

@@ -17,9 +17,22 @@ email VARCHAR(100) UNIQUE,
 senha VARCHAR(100),
 dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP);
 
+INSERT INTO usuario (nome, genero, email, senha, dtRegistro) VALUES
+('Matheuszinho ZL', 'Feminino', 'Teteu@gmail.com', 'Teteu123.'),
+('Fuzimoto', 'Masculino', 'Rnofuzil@gmail.com', 'Erick123.'),
+('Vini Fusca', 'Masculino', 'fuscaopreto@gmail.com', 'Vinisilva123.'),
+('Marilia Boss', 'Feminino', 'Chefa@gmail.com', 'Marilia123.'),
+('Rodrigao Sojas', 'Feminino', 'ReiDaSoja@gmail.com', 'Rodrigao123.');
+
 CREATE TABLE personalidade(
 idClasse INT PRIMARY KEY AUTO_INCREMENT,
 classe VARCHAR(10));
+
+INSERT INTO personalidade (classe) VALUES
+('Summoner'),
+('Ranged'),
+('Melee'),
+('Mago');
 
 CREATE TABLE res_quiz(
 id INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,11 +42,12 @@ CONSTRAINT fk_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 CONSTRAINT fk_classe FOREIGN KEY (fkPersonalidade) REFERENCES personalidade(idClasse),
 dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP);
 
-INSERT INTO personalidade (classe) VALUES
-('Summoner'),
-('Ranged'),
-('Melee'),
-('Mago');
+INSERT INTO res_quiz (id, fkUsuario, fkPersonalidade) VALUES
+('1', 'Matheuszinho ZL', '1'),
+('2', 'Fuzimoto', '2'),
+('5', 'Rodrigao Sojas', '3');
+
+
 
 select * from res_quiz;
 select * from usuario;
