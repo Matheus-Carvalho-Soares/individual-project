@@ -11,14 +11,14 @@ USE Matherraria;
 
 CREATE TABLE usuario(
 idUsuario INT PRIMARY KEY AUTO_INCREMENT,
-nome VARCHAR(100),
-genero VARCHAR(9),
-email VARCHAR(100) UNIQUE,
-senha VARCHAR(100),
+nome VARCHAR(100) not null,
+genero VARCHAR(9) not null,
+email VARCHAR(100) UNIQUE not null,
+senha VARCHAR(100) not null,
 dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP);
 
-INSERT INTO usuario (nome, genero, email, senha, dtRegistro) VALUES
-('Matheuszinho ZL', 'Feminino', 'Teteu@gmail.com', 'Teteu123.'),
+INSERT INTO usuario (nome, genero, email, senha) VALUES
+('Matheuszinho', 'Feminino', 'Teteu@gmail.com', 'Teteu123.'),
 ('Fuzimoto', 'Masculino', 'Rnofuzil@gmail.com', 'Erick123.'),
 ('Vini Fusca', 'Masculino', 'fuscaopreto@gmail.com', 'Vinisilva123.'),
 ('Marilia Boss', 'Feminino', 'Chefa@gmail.com', 'Marilia123.'),
@@ -26,28 +26,29 @@ INSERT INTO usuario (nome, genero, email, senha, dtRegistro) VALUES
 
 CREATE TABLE personalidade(
 idClasse INT PRIMARY KEY AUTO_INCREMENT,
-classe VARCHAR(10));
+classe VARCHAR(10) not null,
+descricao VARCHAR(500));
 
-INSERT INTO personalidade (classe) VALUES
-('Summoner'),
-('Ranged'),
-('Melee'),
-('Mago');
+INSERT INTO personalidade (classe, descricao) VALUES
+('Summoner', 'Você não gosta de tomar riscos, e por isso prefere uma classe mais consistente, que depende apenas de você, sua habilidade de desviar e suas invocações te obedecerem. É uma classe com uma defesa pequena, mas em compensação, suas invocações causam um dano excepcional, que acaba equilibrando.'),
+('Ranged', 'Você prefere a consistência de dano junto de uma defesa razoavel ao invés de um dano mais explosivo sem defesa nenhum. Com ataques a distância e mais estratégicos, é possível notar que toda sua jogatina se baseia mais no pensamento do que na impulsividade.'),
+('Melee','Você gosta de uma zona de conforto, onde alguns ataques não vão te fazer tão mal, com uma gama diversificada de formas de atacar seu inimigo. O dano não é sua prioridade, e sim a sobrevivência ao longo da batalha, não importa o tempo que levar, a vitória é garantida.'),
+('Mago', 'Você valoriza o poder bruto e a versatilidade, mesmo que isso signifique ter que lidar com uma defesa frágil. Seus feitiços poderosos e variados são capazes de mudar o rumo de uma batalha em instantes. Sua jogabilidade exige atenção e planejamento, pois um erro pode ser fatal — mas o acerto certo pode ser devastador.');
 
 CREATE TABLE res_quiz(
-id INT PRIMARY KEY AUTO_INCREMENT,
-fkUsuario INT UNIQUE,
-fkPersonalidade INT,
+id INT AUTO_INCREMENT,
+fkUsuario INT UNIQUE not null,
+fkPersonalidade INT not null,
 CONSTRAINT fk_usuario FOREIGN KEY (fkUsuario) REFERENCES usuario(idUsuario),
 CONSTRAINT fk_classe FOREIGN KEY (fkPersonalidade) REFERENCES personalidade(idClasse),
-dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP);
+PRIMARY KEY (id, fkUsuario, fkPersonalidade),
+dtRegistro DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL);
 
-INSERT INTO res_quiz (id, fkUsuario, fkPersonalidade) VALUES
-('1', 'Matheuszinho ZL', '1'),
-('2', 'Fuzimoto', '2'),
-('5', 'Rodrigao Sojas', '3');
-
-
+INSERT INTO res_quiz (fkUsuario, fkPersonalidade) VALUES
+('1', '1'),
+('2', '2'),
+('4', '3'),
+('5', '3');
 
 select * from res_quiz;
 select * from usuario;

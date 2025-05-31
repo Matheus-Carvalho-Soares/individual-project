@@ -13,7 +13,7 @@
         <video autoplay muted loop class="video">
             <source src="./assets/videos/videoplayback.mp4" type="">
         </video>
-        <div class="logo">
+        <div id="header" class="logo">
         </div>
         <div class="cadastro">
             <div class="card">
@@ -23,7 +23,7 @@
                 </div>
                 <div class="inputCard">
                     <h1>Insira a senha do seu usuário.</h1>
-                    <input id="senha" class="cardInput" type="text" placeholder="matheusjogademelee">
+                    <input id="senha" class="cardInput" type="password" placeholder="matheusjogademelee">
                 </div>
             </div>
             <div class="paginas">
@@ -87,7 +87,11 @@
 
             } else {
 
-                console.log("Houve um erro ao tentar realizar o login!");
+                header.innerHTML = `Email e/ou senha inválidos.`
+
+                setInterval(() => {
+                    header.innerHTML = "";
+                }, 5000);
 
                 resposta.text().then(texto => {
                     console.error(texto);

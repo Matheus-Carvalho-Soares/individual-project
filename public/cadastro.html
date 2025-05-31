@@ -13,7 +13,7 @@
         <video autoplay muted loop class="video">
             <source src="./assets/videos/videoplayback.mp4" type="">
         </video>
-        <div class="logo">
+        <div id="header"class="logo">
         </div>
         <div id="divCadastro" class="cadastro">
             <div id="imagens" class="personagem">
@@ -89,11 +89,11 @@
             <div class="card">
                 <div class="inputCard">
                     <h1>Insira o seu email.</h1>
-                    <input id ="email" class="cardInput" type="text" placeholder="matheusomelhormago@gmail.cmo">
+                    <input onInput="verifyEmail()" id ="email" class="cardInput" type="text" placeholder="matheusomelhormago@gmail.cmo">
                 </div>
                 <div class="inputCard">
                     <h1>Insira a sua senha.</h1>
-                    <input id ="senha" class="cardInput" type="text" placeholder="matheusTheMage">
+                    <input onInput="verifySenha()" id ="senha" class="cardInput" type="password" placeholder="matheusTheMage">
                 </div>
             </div>
             <div class="paginas">
@@ -124,6 +124,7 @@
 
 
     function verifySenha() {
+        header.innerHTML = "";
         var inputSenha = senha.value;
         var num = "0123456789";
         var carEsp = "!@#$%&*().";
@@ -134,6 +135,9 @@
 
         if (inputSenha.length >= 8) {
             verifyTam = true;
+        } else{
+            header.innerHTML += `Sua senha precisa conter 8 caractéres.<br>`
+            verifyTam = false;
         }
         for (var j = 0; j < inputSenha.length; j++) {
             if (carEsp.includes(inputSenha[j])) {
@@ -142,22 +146,41 @@
             }
         }
 
+        if(verifyEsp == false){
+            header.innerHTML += `Sua senha precisa conter um caractér especial (!@#$%¨&*.)<br>`
+        }
+
         for (var i = 0; i < inputSenha.length; i++) {
             if (num.includes(inputSenha[i])) {
                 verifyNum = true;
                 break;
             }
         }
+
+        if(!verifyNum){
+            header.innerHTML += `Sua senha precisa conter um número.<br>`
+        }
         if (verifyTam && verifyEsp && verifyNum) {
             return true;
         } else {
             return false;
         }
-        cadastrar();
+    }
+
+    function verifyEmail(){
+        header.innerHTML = ``;
+        var inputEmail = email.value;
+        if(!inputEmail.includes("@")){
+            header.innerHTML += `Seu email precisa conter @!<br>`
+        }
+
+        if(!inputEmail.includes(".")){
+            header.innerHTML += `Seu email precisa conter .!<br>`
+        }
     }
 
     function cadastrar() {
-        if (verifySenha()) {
+        if (verifySenha() && verifyEmail()) {
             var nomeVar = nome;
             var emailVar = email.value;
             var senhaVar = senha.value;
