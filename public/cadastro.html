@@ -170,12 +170,26 @@
     function verifyEmail(){
         header.innerHTML = ``;
         var inputEmail = email.value;
+        var valid1 = false;
+        var valid2 = false;
         if(!inputEmail.includes("@")){
             header.innerHTML += `Seu email precisa conter @!<br>`
+            valid1 = false;
+        } else{
+            valid1 = true;
         }
 
         if(!inputEmail.includes(".")){
-            header.innerHTML += `Seu email precisa conter .!<br>`
+            valid2 = false
+            header.innerHTML += `Seu email precisa conter .!<br>    `
+        } else{
+            valid2 = true;
+        }
+
+        if(valid1 && valid2){
+            return true;
+        } else{
+            return false;
         }
     }
 
